@@ -71,7 +71,6 @@ func longestPalindrome(s string) string {
 				} else {
 					dp[i][j] = dp[i+1][j-1]
 				}
-
 			}
 			if dp[i][j] == 1 && (j - i + 1 > maxLength){
 				maxLength = j - i + 1
