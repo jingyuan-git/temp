@@ -93,7 +93,7 @@
 package main
 
 import (
-	"fmt"
+	"math"
 	"strings"
 )
 
@@ -106,9 +106,9 @@ func myAtoi(s string) int {
 func clean(s string) (sign int ,abs string) {
 	// 去掉左边的空格
 	s = strings.TrimSpace(s)
-	fmt.Println(s)
+	//fmt.Println(s)
 	if s == ""{
-		return 
+		return
 	}
 	switch s[0] {
 	case '0', '1','2','3','4','5','6','7','8','9':
@@ -123,7 +123,7 @@ func clean(s string) (sign int ,abs string) {
 	default:
 		return
 	}
-	fmt.Println(abs,"abs=")
+	//fmt.Println(abs,"abs=")
 	for i, val := range abs {
 		if val < '0' || val >'9'{
 			abs = abs[:i]
@@ -136,18 +136,19 @@ func clean(s string) (sign int ,abs string) {
 }
 
 func convertAvoidOverflow(sign int ,abs string) int {
-	fmt.Println(sign, abs)
+	//fmt.Println(sign, abs)
 	res := 0
 	for _, val := range abs{
 		//fmt.Println(val - '0')
 		res = res * 10 + int(val) - '0'
 	}
-	if sign * res > 2<<32 -1{
-		return 2<<32-1
+	if sign * res >math.MaxInt32{
+		return math.MaxInt32
 	}
-	if sign * res < -2<<32{
-		return -2<<32
+	if sign * res < math.MinInt32{
+		return math.MaxInt32
 	}
 	return sign * res
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
