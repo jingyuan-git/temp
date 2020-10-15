@@ -46,10 +46,80 @@
 // 
 // Related Topics 数组 双指针 
 // 👍 1914 👎 0
+package main
+
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func maxArea(height []int) int {
 
+// Method1 暴力破解
+// Method2 双指针
+// 两个关键点：
+// 1. 左右指针的移动如何选择
+// 		移动较短的一边
+// 2. 什么情况下，才有必要重新计算面积
+//		移动后的边长大于移动前的边长,（TODO：暂时没看到实现）
+
+func maxArea(height []int) int {
+	// 双指针
+	//  area = min(a[l], a[r]) * (r-l)
+
+	maxArea := 0
+	area := 0
+	l, r := 0, len(height)-1
+
+	for l < r {
+		if height[l] > height[r] {
+			area = height[r] * (r-l)
+			r--
+		} else {
+			area = height[l] * (r-l)
+			l++
+		}
+		if area > maxArea {
+			maxArea = area
+		}
+	}
+	return maxArea
 }
+
+// 此方法func太多，影响速度
+//func maxArea(height []int) int {
+//	if len(height) < 1{
+//		return 0
+//	}
+//	left, right := 0, len(height)-1
+//	area := 0
+//	for left < right {
+//		areaNow := calculate(height[left], height[right], right-left)
+//		area = max(area, areaNow)
+//		if height[left] < height[right]{
+//			left++
+//		} else {
+//			right--
+//		}
+//	}
+//	return area
+//}
+//
+//func calculate(leftSide int, rightSide int, distance int) int {
+//	return  min(leftSide, rightSide)* distance
+//}
+//
+//func min(x int, y int) int {
+//	if x < y{
+//		return  x
+//	}else {
+//		return y
+//	}
+//}
+//
+//func max(x int, y int) int {
+//	if x < y{
+//		return  y
+//	}else {
+//		return x
+//	}
+//}
+
 //leetcode submit region end(Prohibit modification and deletion)
