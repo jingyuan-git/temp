@@ -259,6 +259,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode/leetcode/editor/cn/[39]Combination Sum.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/leetcode/editor/cn/[39]Combination Sum.go" />
+              <option name="questionId" value="39" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
