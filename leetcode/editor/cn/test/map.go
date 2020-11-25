@@ -6,7 +6,7 @@ func main() {
 
 	edgePortConfigMap := make(map[string][]string)
 	edgePortConfigMap["sdf"] = []string{"sdf", "asdf"}
-	fmt.Println(edgePortConfigMap)
+	fmt.Println(edgePortConfigMap["lu"])
 	//lbls := map[string]string{}
 	//lbls["nexthop_mode_left"] = "port"
 	//lbls["nexthop_mode_right"] = "network"
