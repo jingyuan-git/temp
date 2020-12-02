@@ -49,6 +49,30 @@ func permute(nums []int) (res [][]int) {
 	dfs([]int{})
 	return
 
+
+	//var dfs func(path []int)
+	//visited := make(map[int]bool)
+	//dfs = func(path []int) {
+	//	if len(path) == len(nums) {
+	//		temp := make([]int, len(nums))
+	//		copy(temp, path)
+	//		res = append(res, temp)
+	//		return
+	//	}
+	//	for _, n := range nums {
+	//		if visited[n] {
+	//			continue
+	//		}
+	//		path = append(path, n)
+	//		visited[n] = true
+	//		dfs(path)
+	//		path = path[:len(path)-1]
+	//		visited[n] = false
+	//	}
+	//}
+	//dfs([]int{})
+	//return
+
 	//var dfs func(start int, temp []int)
 	//dfs = func(start int, temp []int) {
 	//	if len(temp) == len(nums) {
