@@ -19,7 +19,7 @@ func permuteUnique(nums []int) (res [][]int) {
 		}
 
 		for i, v := range nums {
-			if visited[i] || i > 0 && nums[i-1] == nums[i] {
+			if visited[i] || i > 0 && !visited[i-1] && v == nums[i-1] {
 				continue
 			}
 			path = append(path, v)
