@@ -49,8 +49,8 @@ func merge(intervals [][]int) [][]int {
 	right := intervals[0][1]
 
 	for i := 1; i < len(intervals); i++ {
-		// 当两个元素可以被融合
 		if intervals[i][0] <= right {
+			// 当两个元素可以被融合
 			right = max(intervals[i][1], right)
 		} else {
 			// TODO: 添加之前的res （当2个数组已经不能融合）
