@@ -8,20 +8,42 @@ import (
 func subsets(nums []int) [][]int {
 	sort.Ints(nums)
 	var res [][]int
-	var path []int
-	var dfs func(start int, n int)
-	dfs = func(start int, n int) {
-		if len(path) == n {
-			res = append(res, append([]int(nil), path...))
-			return
-		}
+
+	var dfs func(start int, list []int)
+	dfs = func(start int, list []int) {
+		tmp := make([]int, len(list))
+		copy(tmp, list)
+		res = append(res, tmp)
+
 		for i := start; i < len(nums); i++ {
-			path = append(path, nums[i])
+			list = append(list, nums[i])
+			dfs(start+1, list)
+			list = list[:len(list)-1]
 		}
-		dfs(0, 0)
+		dfs(0, []int{})
 
 	}
 }
+
+//
+//func subsets(nums []int) (ans [][]int) {
+//	set := []int{}
+//	var dfs func(int)
+//	dfs = func(cur int) {
+//		if cur == len(nums) {
+//			ans = append(ans, append([]int(nil), set...))
+//			return
+//		}
+//		// 选择nums[cur]这个元素
+//		set = append(set, nums[cur])
+//		dfs(cur + 1)
+//		// 不选择nums[cur]这个元素
+//		set = set[:len(set)-1]
+//		dfs(cur + 1)
+//	}
+//	dfs(0)
+//	return
+//}
 
 func main() {
 	fmt.Println(subsets([]int{1, 2, 3}))
