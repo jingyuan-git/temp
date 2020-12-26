@@ -45,6 +45,7 @@ package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 type pair struct{ x, y int }
+
 var directions = []pair{{-1, 0}, {1, 0}, {0, -1}, {0, 1}} // 上下左右
 
 func exist(board [][]byte, word string) bool {
@@ -72,17 +73,21 @@ func exist(board [][]byte, word string) bool {
 		//		return false
 		//	}
 		//}
+		visit[x][y] = true
+		defer func() { visit[x][y]  = false }() // TODO: 回溯时还原已访问的单元格
 
 		for _, v := range directions {
-			if x + v.x >= 0 && x +v.x < row && y + v.y >= 0 && y + v.y < column && !visit[x + v.x][y + v.y] {
-				if dfs(x + v.x, y + v.y, index + 1) {
+			if x+v.x >= 0 && x+v.x < row && y+v.y >= 0 && y+v.y < column && !visit[x+v.x][y+v.y] {
+				if dfs(x+v.x, y+v.y, index+1) {
 					return true
 				}
 			}
 		}
+		//visit[x][y]  = false
 		return false
 	}
 
+	// TODO: 寻找出是否匹配已有路径。和回溯例题中列出所有可能算法还是很不一样的
 	for i, row := range board {
 		for j := range row {
 			if dfs(i, j, 0) {

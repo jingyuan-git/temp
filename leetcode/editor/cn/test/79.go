@@ -31,6 +31,8 @@ func exist(board [][]byte, word string) bool {
 		//		return false
 		//	}
 		//}
+		visit[x][y] = true
+		defer func() { visit[x][y] = false }() // TODO: 回溯时还原已访问的单元格
 
 		for _, v := range directions {
 			if x+v.x >= 0 && x+v.x < row && y+v.y >= 0 && y+v.y < column && !visit[x+v.x][y+v.y] {
@@ -39,6 +41,7 @@ func exist(board [][]byte, word string) bool {
 				}
 			}
 		}
+		//visit[x][y]  = false
 		return false
 	}
 
@@ -60,6 +63,11 @@ func main() {
 		{'S', 'F', 'C', 'S'},
 		{'A', 'D', 'E', 'E'},
 	}
-	str := "ABCCED"
+	str := "ABCE"
+
+	//nums := [][]byte{
+	//	{'a', 'a'},
+	//}
+	//str := "aaa"
 	fmt.Println(exist(nums, str))
 }
