@@ -29,11 +29,25 @@
 
 package main
 
-import "sort"
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func subsets(nums []int) [][]int {
-	sort.Ints(nums)
+	//sort.Ints(nums)
+	var res [][]int
 
+	var dfs func(start int, list []int)
+	dfs = func(start int, list []int) {
+		tmp := make([]int, len(list))
+		copy(tmp, list)
+		res = append(res, tmp)
+
+		for i := start; i < len(nums); i++ {
+			list = append(list, nums[i])
+			// TODO: 注意dfs开始的下标 之前写成启示为i+1了，那dfs的开始就没有变化
+			dfs(i+1, list)
+			list = list[:len(list)-1]
+		}
+	}
+	dfs(0, []int{})
+	return res
 }
 //leetcode submit region end(Prohibit modification and deletion)
