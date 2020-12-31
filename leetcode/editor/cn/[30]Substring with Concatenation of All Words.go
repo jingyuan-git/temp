@@ -42,7 +42,7 @@
 // 
 // Related Topics 哈希表 双指针 字符串 
 // 👍 374 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func findSubstring(s string, words []string) []int {

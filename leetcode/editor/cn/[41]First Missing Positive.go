@@ -24,7 +24,7 @@
 // 
 // Related Topics 数组 
 // 👍 870 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func firstMissingPositive(nums []int) int {

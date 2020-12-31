@@ -24,7 +24,7 @@
 // Related Topics 数学 字符串 
 // 👍 524 👎 0
 
-
+package main
 //leetcode submit region begin(Prohibit modification and deletion)
 func multiply(num1 string, num2 string) string {
 
