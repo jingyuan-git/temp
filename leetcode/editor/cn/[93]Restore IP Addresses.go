@@ -33,9 +33,101 @@
 // Related Topics 字符串 回溯算法 
 // 👍 475 👎 0
 
+package main
+
+import "strconv"
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func restoreIpAddresses(s string) []string {
+const SEG_COUNT = 4
 
+var (
+	ans      []string
+	segments []int
+)
+
+func restoreIpAddresses(s string) []string {
+	segments = make([]int, SEG_COUNT)
+	ans = []string{}
+	dfs(0, 0, s)
+	return ans
 }
+
+
+
+func dfs(segStart int, segId int, s string) {
+	// segId == SEG_COUNT 此处的写法不一样，所以之后会需要多写一个else
+	if SEG_COUNT == segId && segStart == len(s) {
+		ipAddr := ""
+		for i := 0; i < SEG_COUNT; i++ {
+			ipAddr += strconv.Itoa(segments[i])
+			if i != SEG_COUNT-1 {
+				ipAddr += "."
+			}
+		}
+		ans = append(ans, ipAddr)
+		return
+	}
+
+	if SEG_COUNT == segId {
+		return
+	}
+
+	if segStart == len(s) {
+		return
+	}
+
+	if s[segStart] == '0' {
+		segments[segId] = 0
+		dfs(segStart + 1, segId + 1, s)
+	}
+
+	addr := 0
+	for segEnd := segStart; segEnd < len(s); segEnd++ {
+		addr = addr * 10 + int(s[segEnd] - '0')
+		if addr > 0 && addr <= 0xFF {
+			segments[segId] = addr
+			dfs(segEnd+1, segId + 1, s)
+		} else {
+			break
+		}
+	}
+}
+
+//func dfs(s string, segId, segStart int) {
+//	// TODO: 如果找到了 4 段 IP 地址并且遍历完了字符串，那么就是一种答案
+//	if segId == SEG_COUNT {
+//		if segStart == len(s) {
+//			ipAddr := ""
+//			for i := 0; i < SEG_COUNT; i++ {
+//				ipAddr += strconv.Itoa(segments[i])
+//				if i != SEG_COUNT - 1 {
+//					ipAddr += "."
+//				}
+//			}
+//			ans = append(ans, ipAddr)
+//		}
+//		return
+//	}
+//
+//	// 如果还没有找到 4 段 IP 地址就已经遍历完了字符串，那么提前回溯
+//	if segStart == len(s) {
+//		return
+//	}
+//	// TODO: 由于不能有前导零，如果当前数字为 0，那么这一段 IP 地址只能为 0
+//	if s[segStart] == '0' {
+//		segments[segId] = 0
+//		dfs(s, segId + 1, segStart + 1)
+//	}
+//	// 一般情况，TODO: 枚举每一种可能性并递归
+//	addr := 0
+//	for segEnd := segStart; segEnd < len(s); segEnd++ {
+//		addr = addr * 10 + int(s[segEnd] - '0')
+//		if addr > 0 && addr <= 0xFF {
+//			segments[segId] = addr
+//			dfs(s, segId + 1, segEnd + 1)
+//		} else {
+//			break
+//		}
+//	}
+//}
 //leetcode submit region end(Prohibit modification and deletion)
