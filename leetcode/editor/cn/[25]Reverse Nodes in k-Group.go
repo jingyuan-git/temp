@@ -53,7 +53,7 @@
 // 
 // Related Topics 链表 
 // 👍 781 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**

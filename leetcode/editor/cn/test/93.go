@@ -8,13 +8,18 @@ import (
 const SEG_COUNT = 4
 
 var (
+<<<<<<< HEAD
 	ans []string
+=======
+	ans      []string
+>>>>>>> 3a64d12a2de8c749d478c070180059de2bea2862
 	segments []int
 )
 
 func restoreIpAddresses(s string) []string {
 	segments = make([]int, SEG_COUNT)
 	ans = []string{}
+<<<<<<< HEAD
 	dfs(s, 0, 0)
 	return ans
 }
@@ -60,3 +65,87 @@ func dfs(s string, segId, segStart int) {
 func main() {
 	fmt.Println(restoreIpAddresses("25525511135"))
 }
+=======
+	dfs(0, 0, s)
+	return ans
+}
+
+func dfs(index int, segId int, s string) {
+	if SEG_COUNT == segId && index == len(s) {
+		ipAddr := ""
+		for i := 0; i < SEG_COUNT; i++ {
+			ipAddr += strconv.Itoa(segments[i])
+			if i != SEG_COUNT-1 {
+				ipAddr += "."
+			}
+		}
+		ans = append(ans, ipAddr)
+		return
+	}
+
+	if SEG_COUNT == segId {
+		return
+	}
+
+	if index == len(s) {
+		return
+	}
+
+}
+
+//const SEG_COUNT = 4
+//
+//var (
+//	ans []string
+//	segments []int
+//)
+//
+//func restoreIpAddresses(s string) []string {
+//	segments = make([]int, SEG_COUNT)
+//	ans = []string{}
+//	dfs(s, 0, 0)
+//	return ans
+//}
+//
+//func dfs(s string, segId, segStart int) {
+//	// 如果找到了 4 段 IP 地址并且遍历完了字符串，那么就是一种答案
+//	if segId == SEG_COUNT {
+//		if segStart == len(s) {
+//			ipAddr := ""
+//			for i := 0; i < SEG_COUNT; i++ {
+//				ipAddr += strconv.Itoa(segments[i])
+//				if i != SEG_COUNT - 1 {
+//					ipAddr += "."
+//				}
+//			}
+//			ans = append(ans, ipAddr)
+//		}
+//		return
+//	}
+//
+//	// 如果还没有找到 4 段 IP 地址就已经遍历完了字符串，那么提前回溯
+//	if segStart == len(s) {
+//		return
+//	}
+//	// 由于不能有前导零，如果当前数字为 0，那么这一段 IP 地址只能为 0
+//	if s[segStart] == '0' {
+//		segments[segId] = 0
+//		dfs(s, segId + 1, segStart + 1)
+//	}
+//	// 一般情况，枚举每一种可能性并递归
+//	addr := 0
+//	for segEnd := segStart; segEnd < len(s); segEnd++ {
+//		addr = addr * 10 + int(s[segEnd] - '0')
+//		if addr > 0 && addr <= 0xFF {
+//			segments[segId] = addr
+//			dfs(s, segId + 1, segEnd + 1)
+//		} else {
+//			break
+//		}
+//	}
+//}
+
+func main() {
+	fmt.Println(restoreIpAddresses("25525511135"))
+}
+>>>>>>> 3a64d12a2de8c749d478c070180059de2bea2862

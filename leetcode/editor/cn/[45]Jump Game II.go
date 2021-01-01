@@ -35,7 +35,7 @@
 // Related Topics 贪心算法 数组 
 // 👍 772 👎 0
 
-
+package main
 //leetcode submit region begin(Prohibit modification and deletion)
 func jump(nums []int) int {
 

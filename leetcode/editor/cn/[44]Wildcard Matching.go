@@ -60,7 +60,7 @@
 // 
 // Related Topics 贪心算法 字符串 动态规划 回溯算法 
 // 👍 563 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func isMatch(s string, p string) bool {
