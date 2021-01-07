@@ -46,22 +46,40 @@
 // Related Topics 设计 字典树 回溯算法 
 // 👍 196 👎 0
 
-
+package main
 //leetcode submit region begin(Prohibit modification and deletion)
-type WordDictionary struct {
+type trieNode struct {
+	next 	map[byte]*trieNode
+	isEnd	bool
+}
 
+func NewTrieNode() *trieNode {
+	return &trieNode{
+		next: make(map[byte]*trieNode),
+		isEnd: false,
+	}
+}
+
+type WordDictionary struct {
+	root	*trieNode
 }
 
 
 /** Initialize your data structure here. */
 func Constructor() WordDictionary {
-
+	return WordDictionary{
+		root: NewTrieNode(),
+	}
 }
 
 
 /** Adds a word into the data structure. */
 func (this *WordDictionary) AddWord(word string)  {
-
+	node := this
+	for _, v := range word {
+		v -= 'a'
+		if
+	}
 }
 
 
