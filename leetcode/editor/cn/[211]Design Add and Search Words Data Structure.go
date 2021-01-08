@@ -75,17 +75,44 @@ func Constructor() WordDictionary {
 
 /** Adds a word into the data structure. */
 func (this *WordDictionary) AddWord(word string)  {
-	node := this
-	for _, v := range word {
-		v -= 'a'
-		if
+	node := this.root
+	for i := 0; i < len(word); i++ {
+		if _, ok := node.next[word[i]]; !ok {
+			node.next[word[i]] = NewTrieNode()
+		}
+		node = node.next[word[i]]
 	}
+	node.isEnd = true
+	return
 }
 
 
 /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
 func (this *WordDictionary) Search(word string) bool {
+	node := this.root
+	return search(word, node)
+}
 
+func search(word string, node *trieNode) bool {
+	if node == nil {
+		return false
+	}
+
+	if word == "" {
+		return node.isEnd
+	}
+
+	if word[0] == '.' {
+		for _, v := range node.next {
+			// TODO: 记得及时return，设置递归的中止条件。不用再继续遍历下去了
+			if search(word[1:], v) {
+				return true
+			}
+			//search(word[1:], v)
+		}
+	}
+
+	return search(word[1:], node.next[word[0]])
 }
 
 
