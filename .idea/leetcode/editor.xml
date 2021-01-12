@@ -19,6 +19,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[1203]Sort Items by Groups Respecting Dependencies.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[1203]Sort Items by Groups Respecting Dependencies.go" />
+              <option name="questionId" value="1309" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode/editor/cn/[12]Integer to Roman.go">
           <value>
             <LeetcodeEditor>
@@ -315,6 +323,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[51]N-Queens.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[51]N-Queens.go" />
+              <option name="questionId" value="51" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode/editor/cn/[53]Maximum Subarray.go">
           <value>
             <LeetcodeEditor>
@@ -384,6 +400,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[60]Permutation Sequence.go" />
               <option name="questionId" value="60" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[61]Rotate List.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[61]Rotate List.go" />
+              <option name="questionId" value="61" />
             </LeetcodeEditor>
           </value>
         </entry>

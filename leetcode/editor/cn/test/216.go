@@ -61,5 +61,5 @@ func combinationSum3(k int, n int) [][]int {
 //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	fmt.Println(combinationSum3(4, 2))
+	fmt.Println(combinationSum3(4, 10))
 }

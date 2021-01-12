@@ -83,6 +83,7 @@ func combinationSum3(k int, n int) [][]int {
 		}
 
 		// TODO: len(temp)+10-cur < k 剪枝：跳过的数字过多，后面已经无法选到 k 个数字
+		// 10-cur代表1-9个数，不能重复的话，剩下可以选择的数字。当10-cur < k - len(temp), 代表剩下可以选择的数字已经不足以填满数组了
 		if rest < 0 || len(temp)+10-cur < k {
 			return
 		}
