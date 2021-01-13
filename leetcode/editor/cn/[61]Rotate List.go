@@ -26,6 +26,9 @@
 // Related Topics 链表 双指针 
 // 👍 391 👎 0
 package main
+
+import "fmt"
+
 type ListNode struct {
 	Val int
 	Next *ListNode
@@ -44,22 +47,47 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		return head
 	}
 
-	// 获得整个链的长度
-	n, p := 1, head
-	for p.Next != nil {
-		p = p.Next
+	n := 1
+	temp := head
+	for temp.Next != nil {
 		n++
+		temp = temp.Next
 	}
 
-	// 将原先end的空next填补
-	p.Next = head
+	m := k % n
+	//fmt.Println(m, n)
+	temp.Next = head
 
-	// 将旋转节点的前半部分末尾的next置空
-	k %= n
-	for i := 1; i <= n-k; i++ {
-		p = p.Next
+	// 此时的temp还在原本链的末尾
+	for i := 1; i <= n - m; i++ {
+		temp = temp.Next
 	}
-	head, p.Next = p.Next, nil
+
+	head = temp.Next
+	temp.Next = nil
 	return head
 }
+//func rotateRight(head *ListNode, k int) *ListNode {
+//	if head == nil || k == 0 {
+//		return head
+//	}
+//
+//	// 获得整个链的长度
+//	n, p := 1, head
+//	for p.Next != nil {
+//		p = p.Next
+//		n++
+//	}
+//
+//	// 将原先end的空next填补
+//	p.Next = head
+//
+//	// 将旋转节点的前半部分末尾的next置空
+//	k %= n
+//	for i := 1; i <= n-k; i++ {
+//		p = p.Next
+//	}
+//	head, p.Next = p.Next, nil
+//	return head
+//}
 //leetcode submit region end(Prohibit modification and deletion)
