@@ -47,6 +47,14 @@
 // 👍 450 👎 0
 
 package main
+
+type TreeNode struct {
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
+
+// TODO: 注意返回的是treeNode，也就是二叉树的结构
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
@@ -63,8 +71,32 @@ package main
  *     Right *TreeNode
  * }
  */
-func sortedListToBST(head *ListNode) *TreeNode {
+func getMedian(left, right *ListNode) *ListNode {
+    slow, fast := left, left
+    // TODO: 是&&
+    for fast != right && fast.Next != right {
+        slow = slow.Next
+        fast = fast.Next.Next
+    }
+    return slow
+}
 
+func buildTree(left, right *ListNode) *TreeNode {
+    if left == right {
+        return nil
+    }
+
+    mid := getMedian(left, right)
+    root := &TreeNode{
+        Val: mid.Val,
+    }
+    root.Left = buildTree(left, mid)
+    root.Right = buildTree(mid.Next, right)
+    return root
+}
+
+func sortedListToBST(head *ListNode) *TreeNode {
+    return buildTree(head, nil)
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
