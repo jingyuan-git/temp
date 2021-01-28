@@ -54,8 +54,13 @@
 // 
 // Related Topics 哈希表 链表 
 // 👍 471 👎 0
+package main
 
-
+type Node struct {
+	Val int
+	Next *Node
+	Random *Node
+}
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a Node.
@@ -67,7 +72,28 @@
  */
 
 func copyRandomList(head *Node) *Node {
-    
+    root := new(Node)
+
+	p := root
+	cur := head
+	m := make(map[*Node]*Node)
+
+	for cur != nil {
+		p.Next = &Node{Val: cur.Val}
+		m[cur] = p.Next
+		p = p.Next
+		cur = cur.Next
+	}
+
+	p = root.Next
+	cur = head
+    for cur != nil {
+    	p.Random = m[cur.Random]
+    	p = p.Next
+    	cur = cur.Next
+	}
+
+    return root.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -110,4 +136,35 @@ class Solution(object):
 链接：https://leetcode-cn.com/problems/copy-list-with-random-pointer/solution/fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao-by-leetcod/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+func copyRandomList(head *Node) *Node {
+    res:=new(Node)
+
+    p:=res
+    cur:=head
+    m:=map[*Node]*Node{}
+    for cur!=nil{
+        p.Next=&Node{Val:cur.Val}
+		// TODO: m存的key是当前所遍历节点的指针，value是复制的节点的指针
+        m[cur]=p.Next
+        p=p.Next
+        cur=cur.Next
+    }
+
+    cur =head
+    p = res.Next
+
+    for cur!=nil{
+        p.Random=m[cur.Random]
+        p=p.Next
+        cur=cur.Next
+    }
+    return res.Next
+}
+
+作者：ba-fei-niu
+链接：https://leetcode-cn.com/problems/copy-list-with-random-pointer/solution/go-shuang-bai-bian-li-liang-ci-by-ba-fei-niu/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 */
