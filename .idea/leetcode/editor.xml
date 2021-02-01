@@ -3,6 +3,14 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[106]Construct Binary Tree from Inorder and Postorder Traversal.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[106]Construct Binary Tree from Inorder and Postorder Traversal.go" />
+              <option name="questionId" value="106" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode/editor/cn/[109]Convert Sorted List to Binary Search Tree.go">
           <value>
             <LeetcodeEditor>
@@ -568,6 +576,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[93]Restore IP Addresses.go" />
               <option name="questionId" value="93" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[94]Binary Tree Inorder Traversal.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[94]Binary Tree Inorder Traversal.go" />
+              <option name="questionId" value="94" />
             </LeetcodeEditor>
           </value>
         </entry>
