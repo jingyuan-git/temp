@@ -36,7 +36,7 @@
 // Related Topics 树 深度优先搜索 
 // 👍 561 👎 0
 
-
+package main
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -47,6 +47,27 @@
  * }
  */
 func isSameTree(p *TreeNode, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
 
+	if p == nil || q == nil {
+		return false
+	}
+
+	if p.Val != q.Val {
+		return false
+	}
+
+	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        return p==null?q==null:q!=null && p.val==q.val && isSameTree(p.left, q.left)&&isSameTree(p.right, q.right);
+    }
+}
+https://leetcode-cn.com/problems/same-tree/solution/xiang-tong-de-shu-by-leetcode-solution/
+ */
