@@ -29,8 +29,6 @@
 
 package main
 
-import "fmt"
-
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -62,7 +60,7 @@ func helper(start, end int) []*TreeNode {
 				root := &TreeNode{i, nil, nil}
 				root.Left = left
 				root.Right = right
-				fmt.Println(root.Val, allTrees)
+				//fmt.Println(root.Val, allTrees)
 				allTrees = append(allTrees, root)
 			}
 		}
