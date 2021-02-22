@@ -68,3 +68,24 @@ func max(x int, y int) int {
 	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+
+// 运行时间可能更快，思路差不多。没有像我一样独立封装max，min
+func maxProfit(prices []int) int {
+    if (prices == nil || len(prices) == 0){
+        return 0
+    }
+    minprice:= prices[0]
+    maxProfit:=0
+    for i:=1;i<len(prices);i++{
+        if prices[i]<minprice{
+            minprice = prices[i]
+        }
+        if (prices[i]- minprice>maxProfit){
+            maxProfit= prices[i]- minprice
+        }
+    }
+    return maxProfit
+}
+*/
