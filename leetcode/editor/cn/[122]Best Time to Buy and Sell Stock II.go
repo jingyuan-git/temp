@@ -48,16 +48,27 @@
 // 
 // Related Topics 贪心算法 数组 
 // 👍 1094 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func maxProfit(prices []int) int {
+func maxProfit(prices []int) (ans int) {
+	for i := 1; i < len(prices); i++ {
+		ans += max(0, prices[i] - prices[i-1])
+	}
+	return ans
+}
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
 /**
 动态规划
+
 func maxProfit(prices []int) int {
     n := len(prices)
     dp0, dp1 := 0, -prices[0]
