@@ -94,6 +94,8 @@ func cloneGraph(node *Node) *Node {
 
 /**
 func cloneGraph(node *Node) *Node {
+// TODO: 最重要的是创建字典visited
+
     visited := map[*Node]*Node{}
     var cg func(node *Node) *Node
     cg = func(node *Node) *Node {
