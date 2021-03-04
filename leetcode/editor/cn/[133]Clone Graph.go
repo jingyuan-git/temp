@@ -78,6 +78,11 @@
 // 👍 327 👎 0
 
 package main
+
+type Node struct {
+	Val int
+	Neighbors []*Node
+}
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a Node.
@@ -88,7 +93,27 @@ package main
  */
 
 func cloneGraph(node *Node) *Node {
-    
+    visited := map[*Node]*Node{}
+    var dfs func(node *Node) *Node
+    dfs = func(node *Node) *Node {
+		if node == nil {
+			return node
+		}
+
+		if _, ok := visited[node]; ok {
+			return visited[node]
+		}
+
+		cloneNode := &Node{node.Val, []*Node{}}
+		visited[node] = cloneNode
+
+		for _, n := range node.Neighbors {
+			visited[node].Neighbors = append(visited[node].Neighbors, dfs(n))
+		}
+		return cloneNode
+	}
+
+	return dfs(node)
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -1,21 +1,59 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Edge struct {
-	val  int
-	prob int
+	kval  map[int]int
+	Visit bool
 }
 
+var dp []int
+
 func minSum(n int, edges [][]int, succProb []int) int {
-	nums := make([][]Edge, n)
+	nums := make(map[int]Edge)
+
+	dp = make([]int, n)
+	for i, _ := range dp {
+		dp[i] = math.MaxInt32
+	}
+	for i := 1; i < n; i++ {
+		nums[i] = Edge{make(map[int]int), false}
+	}
 
 	for k, _ := range edges {
-		n0, n1 := edges[k][0], edges[k][1]
-		nums[n0] = append(nums[n0], Edge{n1, succProb[k]})
+		start, end := edges[k][0], edges[k][1]
+		nums[start].kval[end] = succProb[k]
 	}
 	fmt.Println(nums)
-	return 0
+
+	for k := 1; k < n; k++ {
+		fmt.Println("k = ", k)
+		minNode := findMinNode(nums[k])
+		aaa := nums[minNode]
+		aaa.Visit = true
+		nums[minNode] = aaa
+		fmt.Println(nums)
+
+	}
+
+
+
+	return dp[len(dp)-1]
+}
+
+func findMinNode(nodes Edge) int {
+	minValue := math.MaxInt32
+	minIndex := 0
+	for k, v := range nodes.kval {
+		if v < minValue{
+			minIndex = k
+			minValue = v
+		}
+	}
+	return minIndex
 }
 
 func main() {
