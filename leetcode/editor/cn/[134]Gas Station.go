@@ -57,9 +57,26 @@
 // Related Topics 贪心算法 
 // 👍 592 👎 0
 
-
+package main
 //leetcode submit region begin(Prohibit modification and deletion)
 func canCompleteCircuit(gas []int, cost []int) int {
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+  public int canCompleteCircuit(int[] gas, int[] cost) {
+      int n = gas.length;
+      int cur = 0, res = 0, ans = 0;
+
+      for (int i = 0; i < n; i++) {
+          cur += gas[i] - cost[i];
+          if (cur < 0) {
+              ans = i + 1;
+              res += cur;
+              cur = 0;
+          }
+      }
+      return cur + res >= 0 ? ans : -1;
+  }
+ */
