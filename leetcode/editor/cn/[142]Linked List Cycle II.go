@@ -116,7 +116,7 @@ func detectCycle(head *ListNode) *ListNode {
         if _, ok := seen[head]; ok {
             return head
         }
-        seen[head] = struct{}{}
+        ZZ[head] = struct{}{}
         head = head.Next
     }
     return nil
