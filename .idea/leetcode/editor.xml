@@ -251,6 +251,22 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[142]Linked List Cycle II.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[142]Linked List Cycle II.go" />
+              <option name="questionId" value="142" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[143]Reorder List.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[143]Reorder List.go" />
+              <option name="questionId" value="143" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode/editor/cn/[14]Longest Common Prefix.go">
           <value>
             <LeetcodeEditor>
@@ -304,6 +320,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[208]Implement Trie (Prefix Tree).go" />
               <option name="questionId" value="208" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[209]Minimum Size Subarray Sum.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[209]Minimum Size Subarray Sum.go" />
+              <option name="questionId" value="209" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -400,6 +424,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[29]Divide Two Integers.go" />
               <option name="questionId" value="29" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode/editor/cn/[2]Add Two Numbers.go">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode/editor/cn/[2]Add Two Numbers.go" />
+              <option name="questionId" value="2" />
             </LeetcodeEditor>
           </value>
         </entry>
