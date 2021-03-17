@@ -33,6 +33,8 @@
 // 👍 465 👎 0
 package main
 
+import "fmt"
+
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -54,10 +56,12 @@ func buildTree(inorder []int, postorder []int) *TreeNode {
 	for i, k := range inorder {
 		if k == val {
 			index = i
+			break
 		}
 	}
-	root.Left = buildTree(inorder[:index], postorder[index+1:])
-	root.Right = buildTree(inorder[:index], postorder[index:len(postorder)-2])
+
+	root.Left = buildTree(inorder[:index], postorder[:index])
+	root.Right = buildTree(inorder[index+1:], postorder[index:len(postorder)-1])
 	return root
 }
 //leetcode submit region end(Prohibit modification and deletion)
