@@ -2,13 +2,45 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
+	"log"
 	"os"
+	"runtime/pprof"
 	"strings"
 )
 
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+var memprofile = flag.String("memprofile", "", "write memory profile to this file")
+
 func main() {
+	flag.Parse()
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
+
+	test()
+
+	if *memprofile != "" {
+		f, err := os.Create(*memprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		pprof.WriteHeapProfile(f)
+		f.Close()
+		return
+	}
+}
+
+func test()  {
 	filepath := "./input.txt"
 	file, err := os.OpenFile(filepath, os.O_RDWR, 0666)
 	if err != nil {
@@ -28,7 +60,8 @@ func main() {
 	for {
 		line, err := buf.ReadString('\n')
 		line = strings.TrimSpace(line)
-		writeFile(convertLine(line))
+		s := convertLine(line)
+		writeFile(s)
 
 		//fmt.Println(line)
 
@@ -49,8 +82,8 @@ func writeFile(line string) {
 	var f *os.File
 	var err1 error
 	if checkFileIsExist(filename) { //如果文件存在
-		f, err1 = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
-		fmt.Println("文件存在")
+		f, err1 = os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, os.ModeAppend) //打开文件
+		//fmt.Println("文件存在")
 	} else {
 		f, err1 = os.Create(filename) //创建文件
 		fmt.Println("文件不存在")

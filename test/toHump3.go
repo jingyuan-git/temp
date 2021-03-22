@@ -14,6 +14,7 @@ import (
 
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
 var memprofile = flag.String("memprofile", "", "write memory profile to this file")
+var inputfile = flag.String("inputfile", "", "input file")
 
 func main() {
 	flag.Parse()
@@ -42,7 +43,7 @@ func main() {
 }
 
 func test()  {
-	filepath := "./input.txt"
+	filepath := *inputfile
 	file, err := os.OpenFile(filepath, os.O_RDWR, 0666)
 	if err != nil {
 		fmt.Println("Open file error!", err)
@@ -55,14 +56,14 @@ func test()  {
 		panic(err)
 	}
 	var size = stat.Size()
-	fmt.Println("file size=", size)
+	fmt.Println("file size = ", size)
 
 	buf := bufio.NewReader(file)
 	for {
 		line, err := buf.ReadString('\n')
 		line = strings.TrimSpace(line)
-
-		writeFile(convertLine(line))
+		s := convertLine(line)
+		writeFile(s)
 		//fmt.Println(line)
 
 		if err != nil {
@@ -86,7 +87,7 @@ func writeFile(line string) {
 		//fmt.Println("文件存在")
 	} else {
 		f, err1 = os.Create(filename) //创建文件
-		fmt.Println("文件不存在")
+		fmt.Println("file does not exist")
 	}
 	defer f.Close()
 
