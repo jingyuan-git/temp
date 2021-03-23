@@ -28,7 +28,7 @@ func main() {
 		defer pprof.StopCPUProfile()
 	}
 
-	test()
+	start()
 
 	if *memprofile != "" {
 		f, err := os.Create(*memprofile)
@@ -42,7 +42,7 @@ func main() {
 	}
 }
 
-func test()  {
+func start()  {
 	filepath := *inputfile
 	file, err := os.OpenFile(filepath, os.O_RDWR, 0666)
 	if err != nil {
@@ -68,7 +68,7 @@ func test()  {
 
 		if err != nil {
 			if err == io.EOF {
-				fmt.Println("File read ok!")
+				fmt.Println("Success!")
 				break
 			} else {
 				fmt.Println("Read file error!", err)
@@ -87,7 +87,9 @@ func writeFile(line string) {
 		//fmt.Println("文件存在")
 	} else {
 		f, err1 = os.Create(filename) //创建文件
-		fmt.Println("file does not exist")
+		if err1 != nil {
+			fmt.Printf("ERROR: %+v\n", err1)
+		}
 	}
 	defer f.Close()
 
@@ -105,32 +107,6 @@ func checkFileIsExist(filename string) bool {
 		return false
 	}
 	return true
-}
-
-func isHump(s string) (string, bool) {
-	stringSlice := strings.Split(s, "_")
-	if len(stringSlice) >= 2 {
-		var humpString string
-
-		for _, v := range stringSlice {
-			var capitalizeString string
-			vv := []rune(v)
-			for i := 0; i < len(vv); i++ {
-				if i == 0 {
-					capitalizeString += string(vv[i])
-				} else {
-					if vv[i] >= 65 && vv[i] <= 90 {
-						vv[i] += 32
-						capitalizeString += string(vv[i])
-					}
-				}
-			}
-			humpString += capitalizeString
-		}
-		return humpString, true
-	} else {
-		return s, false
-	}
 }
 
 func toHump (s string) string {
@@ -156,21 +132,6 @@ func toHump (s string) string {
 }
 
 func convertLine(line string) string {
-	re := regexp.MustCompile(`(\w+)_+(\w+)`)
+	re := regexp.MustCompile(`([A-Z]+)(_+([A-Z]+))+`)
 	return re.ReplaceAllStringFunc(line, toHump) + "\n"
-
-	//fmt.Println(re.ReplaceAllStringFunc(line, toHump))
-
-	//stringLine := strings.Split(line, " ")
-	//for _, v := range stringLine {
-	//	convertVarious, isConvertVarious := isHump(v)
-	//	if isConvertVarious {
-	//		result += convertVarious
-	//	} else {
-	//		result += v
-	//	}
-	//	result += " "
-	//}
-	//result += "\n"
-	//return result
 }
