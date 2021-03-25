@@ -1,0 +1,7 @@
+note: Demo Example
+sample: |
+  apiVersion: demo.myproject/v1alpha1
+  kind: Demo
+  metadata:
+    name: demo-example
+  spec:
