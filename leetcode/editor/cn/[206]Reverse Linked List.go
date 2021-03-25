@@ -47,22 +47,23 @@ package main
  * }
  */
 func reverseList(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
-	}
+	//if head == nil {
+	//	return nil
+	//}
+	//
+	//root := &ListNode{0, nil}
+	////root.Next = head
+	//pre := root
+	//root2 := head
 
-	root := &ListNode{0, nil}
-	//root.Next = head
-	pre := root
-	root2 := head
-
+	var pre *ListNode
 	for head != nil {
 		temp := head.Next
 		head.Next = pre
 		pre = head
 		head = temp
 	}
-	root2.Next = nil
+	//root2.Next = nil
 	return pre
 }
 //leetcode submit region end(Prohibit modification and deletion)
