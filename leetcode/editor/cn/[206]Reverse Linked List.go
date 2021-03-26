@@ -47,6 +47,7 @@ package main
  * }
  */
 func reverseList(head *ListNode) *ListNode {
+	// 不必大费周章了
 	//if head == nil {
 	//	return nil
 	//}
