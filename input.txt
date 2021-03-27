@@ -64,763 +64,1059 @@
 
 	/* Interface flag for MAC-IP Learning feature */
 	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-
-
-
-
-
-		VIF_TYPE_HOST         VIFType = 0
-    	VIF_TYPE_AGENT        VIFType = 1
-    	VIF_TYPE_PHYSICAL     VIFType = 2
-    	VIF_TYPE_VIRTUAL      VIFType = 3
-    	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-    	VIF_TYPE_GATEWAY      VIFType = 5
-    	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-    	VIF_TYPE_STATS        VIFType = 7
-    	VIF_TYPE_VLAN         VIFType = 8
-    	VIF_TYPE_MONITORING   VIFType = 9
-    	VIF_TYPE_MAX          VIFType = 10
-
-    	VIF_FLAG_POLICY_ENABLED  = 0x1
-    	VIF_FLAG_XCONNECT        = 0x2
-    	VIF_FLAG_SERVICE_IF      = 0x4
-    	VIF_FLAG_MIRROR_RX       = 0x8
-    	VIF_FLAG_MIRROR_TX       = 0x10
-    	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-    	VIF_FLAG_L3_ENABLED      = 0x40
-    	VIF_FLAG_L2_ENABLED      = 0x80
-    	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-    	/* The physical interface corresponds to a vhost interface */
-    	VIF_FLAG_VHOST_PHYS = 0x200
-    	VIF_FLAG_PROMISCOUS = 0x400
-
-    	/* untagged packets should be treated as packets with tag 0 */
-    	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-    	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-    	VIF_FLAG_PMD             = 0x2000
-
-    	/* The physical interface supports hardware filtering */
-    	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-    	/*
-    	 * The interface is being monitored,
-    	 * so we copy all the packets to another interface
-    	 */
-    	VIF_FLAG_MONITORED        = 0x8000
-    	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-    	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/*
-    	 * The interface is marked to drop new incoming flows
-    	 * marked by vrouter agent to enforce flow-limit
-    	 */
-    	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-    	VIF_FLAG_MAC_LEARN      = 0x80000
-    	VIF_FLAG_MAC_PROXY      = 0x100000
-    	VIF_FLAG_ETREE_ROOT     = 0x200000
-    	VIF_FLAG_GRO_NEEDED     = 0x400000
-    	VIF_FLAG_MRG_RXBUF      = 0x800000
-    	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-    	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-    	/* Mock physical would be used for simulating physical/vhost
-    	 * interface in vtest */
-    	VIF_FLAG_MOCK_DEVICE = 0x4000000
-    	VIF_FLAG_HBS_LEFT    = 0x8000000
-    	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-    	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-    	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
-    	/* Interface flag for MAC-IP Learning feature */
-    	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
-
-    		VIF_TYPE_HOST         VIFType = 0
-        	VIF_TYPE_AGENT        VIFType = 1
-        	VIF_TYPE_PHYSICAL     VIFType = 2
-        	VIF_TYPE_VIRTUAL      VIFType = 3
-        	VIF_TYPE_XEN_LL_HOST  VIFType = 4
-        	VIF_TYPE_GATEWAY      VIFType = 5
-        	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
-        	VIF_TYPE_STATS        VIFType = 7
-        	VIF_TYPE_VLAN         VIFType = 8
-        	VIF_TYPE_MONITORING   VIFType = 9
-        	VIF_TYPE_MAX          VIFType = 10
-
-        	VIF_FLAG_POLICY_ENABLED  = 0x1
-        	VIF_FLAG_XCONNECT        = 0x2
-        	VIF_FLAG_SERVICE_IF      = 0x4
-        	VIF_FLAG_MIRROR_RX       = 0x8
-        	VIF_FLAG_MIRROR_TX       = 0x10
-        	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
-        	VIF_FLAG_L3_ENABLED      = 0x40
-        	VIF_FLAG_L2_ENABLED      = 0x80
-        	VIF_FLAG_DHCP_ENABLED    = 0x100
-
-        	/* The physical interface corresponds to a vhost interface */
-        	VIF_FLAG_VHOST_PHYS = 0x200
-        	VIF_FLAG_PROMISCOUS = 0x400
-
-        	/* untagged packets should be treated as packets with tag 0 */
-        	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
-        	VIF_FLAG_NO_ARP_PROXY    = 0x1000
-        	VIF_FLAG_PMD             = 0x2000
-
-        	/* The physical interface supports hardware filtering */
-        	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
-
-        	/*
-        	 * The interface is being monitored,
-        	 * so we copy all the packets to another interface
-        	 */
-        	VIF_FLAG_MONITORED        = 0x8000
-        	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
-        	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
-
-        	/*
-        	 * The interface is marked to drop new incoming flows
-        	 * marked by vrouter agent to enforce flow-limit
-        	 */
-        	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
-        	VIF_FLAG_MAC_LEARN      = 0x80000
-        	VIF_FLAG_MAC_PROXY      = 0x100000
-        	VIF_FLAG_ETREE_ROOT     = 0x200000
-        	VIF_FLAG_GRO_NEEDED     = 0x400000
-        	VIF_FLAG_MRG_RXBUF      = 0x800000
-        	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
-        	VIF_FLAG_IGMP_ENABLED   = 0x2000000
-
-        	/* Mock physical would be used for simulating physical/vhost
-        	 * interface in vtest */
-        	VIF_FLAG_MOCK_DEVICE = 0x4000000
-        	VIF_FLAG_HBS_LEFT    = 0x8000000
-        	VIF_FLAG_HBS_RIGHT   = 0x10000000
-
-        	/* When vRouter act as gateway, allow traffic between fabric-fabric */
-        	VIF_FLAG_FAB_GW_MODE = 0x20000000
-
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
+	VIF_TYPE_HOST         VIFType = 0
+	VIF_TYPE_AGENT        VIFType = 1
+	VIF_TYPE_PHYSICAL     VIFType = 2
+	VIF_TYPE_VIRTUAL      VIFType = 3
+	VIF_TYPE_XEN_LL_HOST  VIFType = 4
+	VIF_TYPE_GATEWAY      VIFType = 5
+	VIF_TYPE_VIRTUAL_VLAN VIFType = 6
+	VIF_TYPE_STATS        VIFType = 7
+	VIF_TYPE_VLAN         VIFType = 8
+	VIF_TYPE_MONITORING   VIFType = 9
+	VIF_TYPE_MAX          VIFType = 10
+
+	VIF_FLAG_POLICY_ENABLED  = 0x1
+	VIF_FLAG_XCONNECT        = 0x2
+	VIF_FLAG_SERVICE_IF      = 0x4
+	VIF_FLAG_MIRROR_RX       = 0x8
+	VIF_FLAG_MIRROR_TX       = 0x10
+	VIF_FLAG_TX_CSUM_OFFLOAD = 0x20
+	VIF_FLAG_L3_ENABLED      = 0x40
+	VIF_FLAG_L2_ENABLED      = 0x80
+	VIF_FLAG_DHCP_ENABLED    = 0x100
+
+	/* The physical interface corresponds to a vhost interface */
+	VIF_FLAG_VHOST_PHYS = 0x200
+	VIF_FLAG_PROMISCOUS = 0x400
+
+	/* untagged packets should be treated as packets with tag 0 */
+	VIF_FLAG_NATIVE_VLAN_TAG = 0x800
+	VIF_FLAG_NO_ARP_PROXY    = 0x1000
+	VIF_FLAG_PMD             = 0x2000
+
+	/* The physical interface supports hardware filtering */
+	VIF_FLAG_FILTERING_OFFLOAD = 0x4000
+
+	/*
+	 * The interface is being monitored,
+	 * so we copy all the packets to another interface
+	 */
+	VIF_FLAG_MONITORED        = 0x8000
+	VIF_FLAG_UNKNOWN_UC_FLOOD = 0x10000
+	VIF_FLAG_VLAN_OFFLOAD     = 0x20000
+
+	/*
+	 * The interface is marked to drop new incoming flows
+	 * marked by vrouter agent to enforce flow-limit
+	 */
+	VIF_FLAG_DROP_NEW_FLOWS = 0x40000
+	VIF_FLAG_MAC_LEARN      = 0x80000
+	VIF_FLAG_MAC_PROXY      = 0x100000
+	VIF_FLAG_ETREE_ROOT     = 0x200000
+	VIF_FLAG_GRO_NEEDED     = 0x400000
+	VIF_FLAG_MRG_RXBUF      = 0x800000
+	VIF_FLAG_MIRROR_NOTAG   = 0x1000000
+	VIF_FLAG_IGMP_ENABLED   = 0x2000000
+
+	/* Mock physical would be used for simulating physical/vhost
+	 * interface in vtest */
+	VIF_FLAG_MOCK_DEVICE = 0x4000000
+	VIF_FLAG_HBS_LEFT    = 0x8000000
+	VIF_FLAG_HBS_RIGHT   = 0x10000000
+
+	/* When vRouter act as gateway, allow traffic between fabric-fabric */
+	VIF_FLAG_FAB_GW_MODE = 0x20000000
+
+	/* Interface flag for MAC-IP Learning feature */
+	VIF_FLAG_MAC_IP_LEARNING = 0x40000000
