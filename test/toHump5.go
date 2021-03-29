@@ -25,8 +25,8 @@ func main() {
 		case "cpu":
 			defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
 		case "mem":
-			//defer profile.Start(profile.MemProfile, profile.ProfilePath("."), profile.MemProfileRate(1)).Stop()
-			defer profile.Start(profile.MemProfile, profile.ProfilePath(".")).Stop()
+			defer profile.Start(profile.MemProfile, profile.ProfilePath("."), profile.MemProfileRate(1)).Stop()
+			//defer profile.Start(profile.MemProfile, profile.ProfilePath(".")).Stop()
 		case "trace":
 			defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
 		}
