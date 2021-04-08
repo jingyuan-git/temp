@@ -32,12 +32,73 @@
 //Follow up: Could you solve it in linear time/space? Related Topics 排序 
 // 👍 364 👎 0
 package main
+
+import "fmt"
+
 //TODO: 基排序 & 桶排序 可以在 O(N)O(N) 的时间内完成整数之间的排序。
 //leetcode submit region begin(Prohibit modification and deletion)
 func maximumGap(nums []int) int {
+	n := len(nums)
+	if n < 2 {
+		return 0
+	}
 
+	maxValue := max(nums...)
+
+	// 一定要加等于，最大的数如果是10的倍数，也需要进入循环。
+	for exp := 1; exp <= maxValue; exp*=10 {
+		cnt := make([]int, 10)
+
+		var digit int
+		for _, v := range nums {
+			digit = v/exp%10
+			cnt[digit]++
+		}
+
+		//for i, _ := range cnt[1:] {
+		//	cnt[i] += cnt[i-1]
+		//}
+		for i := 1; i < 10; i++ {
+			cnt[i] += cnt[i-1]
+		}
+
+		buf := make([]int, n)
+		//for _, v := range nums{
+		//	digit = v/exp%10
+		//	buf[cnt[digit]-1] = v
+		//	cnt[digit]--
+		//}
+		for i := n - 1; i >= 0; i-- {
+			digit := nums[i] / exp % 10
+			buf[cnt[digit]-1] = nums[i]
+			cnt[digit]--
+		}
+		copy(nums, buf)
+	}
+
+	fmt.Println(nums)
+	res := 0
+	for i := 1; i < n; i++ {
+		res = max(res, nums[i]-nums[i-1])
+	}
+	return res
 }
+
+func max(nums ...int) int {
+	res := nums[0]
+	for _, v := range nums[1:] {
+		if v > res {
+			res = v
+		}
+	}
+	return res
+}
+
 //leetcode submit region end(Prohibit modification and deletion)
+
+
+
+
 
 /**
 基数排序
@@ -49,24 +110,31 @@ func maximumGap(nums []int) (ans int) {
     }
 
     buf := make([]int, n)
+	// 找到最大的值，得到需要排多少次（几次for循环）
     maxVal := max(nums...)
     for exp := 1; exp <= maxVal; exp *= 10 {
         cnt := [10]int{}
+		//统计每个桶中有多少个数
         for _, v := range nums {
+			// digit逐渐拿到个位，十位，百位
             digit := v / exp % 10
             cnt[digit]++
         }
+		// 此步是将count[j]由原本表示每个桶的数量，变为表示在数组中的索引
         for i := 1; i < 10; i++ {
             cnt[i] += cnt[i-1]
         }
+		// 此步对nums按照低位大小进行排序，(count[digit] - 1)表示排序后nums[j]应该在的位置
         for i := n - 1; i >= 0; i-- {
             digit := nums[i] / exp % 10
             buf[cnt[digit]-1] = nums[i]
             cnt[digit]--
         }
+		// 将临时数组拷贝给nums
         copy(nums, buf)
     }
 
+	// 此时的nums已经排好序，找到相邻元素最大差值
     for i := 1; i < n; i++ {
         ans = max(ans, nums[i]-nums[i-1])
     }
