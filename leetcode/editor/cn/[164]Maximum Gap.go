@@ -112,6 +112,7 @@ func maximumGap(nums []int) (ans int) {
     buf := make([]int, n)
 	// 找到最大的值，得到需要排多少次（几次for循环）
     maxVal := max(nums...)
+	// 一定要加等于，最大的数如果是10的倍数，也需要进入循环。
     for exp := 1; exp <= maxVal; exp *= 10 {
         cnt := [10]int{}
 		//统计每个桶中有多少个数
