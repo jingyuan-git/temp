@@ -159,7 +159,7 @@ func max(a ...int) int {
  */
 
 /**
-桶的算法
+TODO：桶排序的算法
 
 type pair struct{ min, max int }
 
