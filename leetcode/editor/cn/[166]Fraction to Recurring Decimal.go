@@ -102,7 +102,7 @@ func fractionToDecimal(numerator int, denominator int) string {
 	}
 
 	if loopStart != -1 {
-		// 塞进去 做括号
+		// 塞进去 左“（”括号
 		res = append(res[:loopStart], append([]string{"("}, res[loopStart:]...)...)
 		res = append(res, ")")
 	}

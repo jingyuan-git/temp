@@ -95,6 +95,7 @@ func compareVersion(version1 string, version2 string) int {
 		if i < len(s1) {
 			n1, _ = strconv.Atoi(s1[i])
 		} else {
+			// 超过本来输入长度，则补0
 			n1 = 0
 		}
 
