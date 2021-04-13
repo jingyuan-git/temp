@@ -4,9 +4,21 @@ import "fmt"
 
 func main() {
 
-	edgePortConfigMap := make(map[string][]string)
-	edgePortConfigMap["sdf"] = []string{"sdf", "asdf"}
-	fmt.Println(edgePortConfigMap["lu"])
+	existedIndexes := map[string]bool{}
+
+	existedIndexes["xxx"] = true
+	existedIndexes["222"] = false
+
+	k, v := existedIndexes["xxx"]
+	//fmt.Println(k, v)
+
+	if k, v = existedIndexes["222"]; v {
+		fmt.Println(k, v)
+
+	}
+	//edgePortConfigMap := make(map[string][]string)
+	//edgePortConfigMap["sdf"] = []string{"sdf", "asdf"}
+	//fmt.Println(edgePortConfigMap["lu"])
 	//lbls := map[string]string{}
 	//lbls["nexthop_mode_left"] = "port"
 	//lbls["nexthop_mode_right"] = "network"
