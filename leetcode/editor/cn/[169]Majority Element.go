@@ -24,10 +24,25 @@
 //Follow-up: Could you solve the problem in linear time and in O(1) space? Relat
 //ed Topics 位运算 数组 分治算法 
 // 👍 953 👎 0
-
+package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func majorityElement(nums []int) int {
+	buf := map[int]int{}
 
+	for _, num := range nums {
+		buf[num] += 1
+	}
+
+	maxV := 0
+	var res int
+	for k, v := range buf {
+		if v > maxV {
+			res = k
+			maxV = v
+		}
+	}
+
+	return res
 }
 //leetcode submit region end(Prohibit modification and deletion)
