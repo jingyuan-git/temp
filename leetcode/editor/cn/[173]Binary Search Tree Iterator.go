@@ -62,6 +62,7 @@
 
 package main
 
+// next的次序是前序遍历
 // Method 1: 递归遍历，结果存在数组中
 // Method 2：栈
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -74,22 +75,34 @@ package main
  * }
  */
 type BSTIterator struct {
-
+	stack []*TreeNode
+	cur *TreeNode
 }
 
 
 func Constructor(root *TreeNode) BSTIterator {
-
+	return BSTIterator{
+		cur: root,
+	}
 }
 
 
 func (this *BSTIterator) Next() int {
+	for node := this.cur ; node != nil; node = node.Left {
+		this.stack = append(this.stack, node)
+	}
 
+	this.cur, this.stack = this.stack[len(this.stack) - 1], this.stack[:len(this.stack) - 1]
+	res := this.cur.Val
+	// 试探右侧的子树是否存在
+	this.cur = this.cur.Right
+
+	return res
 }
 
 
 func (this *BSTIterator) HasNext() bool {
-
+	return this.cur != nil || len(this.stack) > 0
 }
 
 
@@ -100,3 +113,72 @@ func (this *BSTIterator) HasNext() bool {
  * param_2 := obj.HasNext();
  */
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+
+type BSTIterator struct {
+    arr []int
+}
+
+func Constructor(root *TreeNode) (it BSTIterator) {
+    it.inorder(root)
+    return
+}
+
+func (it *BSTIterator) inorder(node *TreeNode) {
+    if node == nil {
+        return
+    }
+    it.inorder(node.Left)
+    it.arr = append(it.arr, node.Val)
+    it.inorder(node.Right)
+}
+
+func (it *BSTIterator) Next() int {
+    val := it.arr[0]
+    it.arr = it.arr[1:]
+    return val
+}
+
+func (it *BSTIterator) HasNext() bool {
+    return len(it.arr) > 0
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/binary-search-tree-iterator/solution/er-cha-sou-suo-shu-die-dai-qi-by-leetcod-4y0y/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+ */
+
+/**
+
+type BSTIterator struct {
+    stack []*TreeNode
+    cur   *TreeNode
+}
+
+func Constructor(root *TreeNode) BSTIterator {
+    return BSTIterator{cur: root}
+}
+
+func (it *BSTIterator) Next() int {
+    for node := it.cur; node != nil; node = node.Left {
+        it.stack = append(it.stack, node)
+    }
+    it.cur, it.stack = it.stack[len(it.stack)-1], it.stack[:len(it.stack)-1]
+    val := it.cur.Val
+    it.cur = it.cur.Right
+    return val
+}
+
+func (it *BSTIterator) HasNext() bool {
+    return it.cur != nil || len(it.stack) > 0
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/binary-search-tree-iterator/solution/er-cha-sou-suo-shu-die-dai-qi-by-leetcod-4y0y/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+ */
