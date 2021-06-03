@@ -68,16 +68,16 @@ package main
 
 // method1
 // 暴力破解
-func twoSum(nums []int, target int) []int {
-	for i, one := range nums {
-		for j := i + 1; j < len(nums); j++ {
-			if target == one + nums[j]{
-				return []int{i, j}
-			}
-		}
-	}
-	return nil
-}
+//func twoSum(nums []int, target int) []int {
+//	for i, one := range nums {
+//		for j := i + 1; j < len(nums); j++ {
+//			if target == one + nums[j]{
+//				return []int{i, j}
+//			}
+//		}
+//	}
+//	return nil
+//}
 
 // method2
 //能够快速寻找数组中是否存在目标元素。如果存在，我们需要找出它的索引。
@@ -91,6 +91,19 @@ func twoSum(nums []int, target int) []int {
 //	}
 //	return nil
 //}
+
+func twoSum(nums []int, target int) []int {
+	dic := map[int]int{}
+	for i, v := range nums {
+		sub := target - v
+		if j, ok := dic[sub]; ok {
+			return []int{j, i}
+		}
+		dic[v] = i
+	}
+	return nil
+}
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 
