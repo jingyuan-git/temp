@@ -55,34 +55,73 @@ type ListNode struct {
  *     Next *ListNode
  * }
  */
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var tail, head *ListNode
-	carry := 0
+//func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+//	var tail, head *ListNode
+//	carry := 0
+//
+//	for l1 != nil || l2 != nil {
+//		v1, v2 := 0, 0
+//		if l1 != nil{
+//			v1 = l1.Val
+//			l1 = l1.Next
+//		}
+//		if l2 != nil{
+//			v2 = l2.Val
+//			l2 = l2.Next
+//		}
+//		sum := v1 + v2 +carry
+//		carry = sum/10
+//		sum = sum%10
+//		if head == nil{
+//			head = &ListNode{sum, nil}
+//			tail = head
+//		}else {
+//			tail.Next = &ListNode{sum, nil}
+//			tail = tail.Next
+//		}
+//	}
+//	if carry > 0{
+//		tail.Next = &ListNode{carry, nil}
+//	}
+//	return head
+//}
 
-	for l1 != nil || l2 != nil {
-		v1, v2 := 0, 0
-		if l1 != nil{
-			v1 = l1.Val
-			l1 = l1.Next
-		}
-		if l2 != nil{
-			v2 = l2.Val
-			l2 = l2.Next
-		}
-		sum := v1 + v2 +carry
-		carry = sum/10
-		sum = sum%10
-		if head == nil{
-			head = &ListNode{sum, nil}
-			tail = head
-		}else {
-			tail.Next = &ListNode{sum, nil}
-			tail = tail.Next
-		}
+//  21.6.5
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil && l2 == nil {
+		return &ListNode{}
 	}
-	if carry > 0{
-		tail.Next = &ListNode{carry, nil}
+	res := &ListNode{}
+	dummy := res
+	mod := 0
+	for l1 != nil && l2 != nil {
+		mod = (l1.Val + l2.Val + mod) / 10
+		res.Next = &ListNode{(l1.Val + l2.Val + mod) % 10, nil}
+		res = res.Next
+		l1 = l1.Next
+		l2 = l2.Next
 	}
-	return head
+
+	for l1 == nil && l2 == nil {
+		if mod == 1 {
+			res.Val = 1
+		}
+		return dummy.Next
+	}
+
+	for l1 != nil {
+		mod = (l1.Val + mod) / 10
+		res.Next = &ListNode{(l1.Val + mod) % 10, nil}
+		res = res.Next
+		l1 = l1.Next
+	}
+
+	for l2 != nil {
+		mod = (l2.Val + mod) / 10
+		res.Next = &ListNode{(l2.Val + mod) % 10, nil}
+		res = res.Next
+		l2 = l2.Next
+	}
+	return dummy.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
