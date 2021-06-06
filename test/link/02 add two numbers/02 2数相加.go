@@ -49,9 +49,12 @@ import (
 
 func addTwoNumbers(l1 *link.ListNode, l2 *link.ListNode) *link.ListNode {
 	mod := 0
+	res := &link.ListNode{}
+	dummy := res
 
 	var v1, v2 int
 	for l1 != nil || l2 != nil {
+		v1, v2 = 0, 0
 		if l1 != nil {
 			v1 = l1.Val
 			l1 = l1.Next
@@ -62,8 +65,15 @@ func addTwoNumbers(l1 *link.ListNode, l2 *link.ListNode) *link.ListNode {
 			l2 = l2.Next
 		}
 
-		for
+		sum := (v1 + v2 + mod) % 10
+		mod = (v1 + v2 + mod) / 10
+		res.Next = &link.ListNode{Val: sum}
+		res = res.Next
 	}
+	if mod != 0 {
+		res.Next = &link.ListNode{mod, nil}
+	}
+	return dummy.Next
 }
 
 func main() {

@@ -42,6 +42,8 @@
 
 package main
 
+import "aaa/test/link"
+
 type ListNode struct {
 	Val int
 	Next *ListNode
@@ -88,40 +90,35 @@ type ListNode struct {
 
 //  21.6.5
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		return &ListNode{}
-	}
+	mod := 0
 	res := &ListNode{}
 	dummy := res
-	mod := 0
-	for l1 != nil && l2 != nil {
-		mod = (l1.Val + l2.Val + mod) / 10
-		res.Next = &ListNode{(l1.Val + l2.Val + mod) % 10, nil}
-		res = res.Next
-		l1 = l1.Next
-		l2 = l2.Next
-	}
 
-	for l1 == nil && l2 == nil {
-		if mod == 1 {
-			res.Val = 1
+	var v1, v2 int
+	for l1 != nil || l2 != nil {
+		v1, v2 = 0, 0
+		if l1 != nil {
+			v1 = l1.Val
+			l1 = l1.Next
 		}
-		return dummy.Next
-	}
 
-	for l1 != nil {
-		mod = (l1.Val + mod) / 10
-		res.Next = &ListNode{(l1.Val + mod) % 10, nil}
-		res = res.Next
-		l1 = l1.Next
-	}
+		if l2 != nil {
+			v2 = l2.Val
+			l2 = l2.Next
+		}
 
-	for l2 != nil {
-		mod = (l2.Val + mod) / 10
-		res.Next = &ListNode{(l2.Val + mod) % 10, nil}
+		sum := (v1 + v2 + mod) % 10
+		mod = (v1 + v2 + mod) / 10
+		res.Next = &ListNode{Val: sum}
 		res = res.Next
-		l2 = l2.Next
+	}
+	if mod != 0 {
+		res.Next = &ListNode{mod, nil}
 	}
 	return dummy.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+func main() {
+
+}
