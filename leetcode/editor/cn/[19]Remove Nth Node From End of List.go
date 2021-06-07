@@ -38,6 +38,8 @@
 // 👍 1084 👎 0
 package main
 
+import "aaa/test/link"
+
 type ListNode struct {
 	Val 	int
 	Next 	*ListNode
@@ -52,15 +54,33 @@ type ListNode struct {
  */
 
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	//dummy := &ListNode{0, head}
+	//fast, slow := head, dummy
+	//for i := 0; i < n; i++{
+	//	fast = fast.Next
+	//}
+	//for ; fast != nil; fast = fast.Next{
+	//	slow = slow.Next
+	//}
+	//slow.Next = slow.Next.Next
+	//return dummy.Next
+
+	// 21.6.7
 	dummy := &ListNode{0, head}
-	fast, slow := head, dummy
-	for i := 0; i < n; i++{
-		fast = fast.Next
+	pre, cur := dummy, dummy
+	ppre :=  &ListNode{}
+	for n > 0 {
+		cur = cur.Next
+		n--
 	}
-	for ; fast != nil; fast = fast.Next{
-		slow = slow.Next
+	for cur != nil {
+		cur = cur.Next
+		//ppre = pre
+		pre = pre.Next
 	}
-	slow.Next = slow.Next.Next
+
+	ppre.Next = pre.Next
+
 	return dummy.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
