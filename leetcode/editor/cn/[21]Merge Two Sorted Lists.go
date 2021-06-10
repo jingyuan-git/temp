@@ -45,28 +45,53 @@ package main
  *     Next *ListNode
  * }
  */
+//func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+//	prehead := &ListNode{}
+//	result := prehead
+//	for l1 != nil && l2 != nil {
+//		if l1.Val < l2.Val {
+//			prehead.Next = l1
+//			prehead = prehead.Next
+//			l1 = l1.Next
+//		} else {
+//			prehead.Next = l2
+//			prehead = prehead.Next
+//			l2 = l2.Next
+//		}
+//	}
+//
+//	if l1 != nil{
+//		prehead.Next = l1
+//	}
+//	if l2 != nil{
+//		prehead.Next = l2
+//	}
+//
+//	return result.Next
+//}
+
+// 21.6.10
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	prehead := &ListNode{}
-	result := prehead
+	dummy := &ListNode{}
+	cur := dummy
 	for l1 != nil && l2 != nil {
 		if l1.Val < l2.Val {
-			prehead.Next = l1
-			prehead = prehead.Next
+			cur.Next = &ListNode{l1.Val, nil}
 			l1 = l1.Next
 		} else {
-			prehead.Next = l2
-			prehead = prehead.Next
+			cur.Next = &ListNode{l2.Val, nil}
 			l2 = l2.Next
 		}
+		cur = cur.Next
 	}
 
-	if l1 != nil{
-		prehead.Next = l1
+	if l1 == nil {
+		cur.Next = l2
 	}
-	if l2 != nil{
-		prehead.Next = l2
+	if l2 == nil {
+		cur.Next = l1
 	}
-
-	return result.Next
+	return dummy.Next
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
