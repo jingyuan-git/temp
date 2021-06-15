@@ -63,19 +63,35 @@ func swapPairs(head *ListNode) *ListNode {
 	//	post = post.Next.Next
 	//}
 	//return res.Next
-	dummyHead := &ListNode{Val: 0, Next: head}
-	pre := dummyHead
-	for pre.Next != nil && pre.Next.Next != nil{
-		// 赋值
+
+	//dummyHead := &ListNode{Val: 0, Next: head}
+	//pre := dummyHead
+	//for pre.Next != nil && pre.Next.Next != nil{
+	//	// 赋值
+	//	cur := pre.Next
+	//	post := pre.Next.Next
+	//	// swap every two adjacent nodes
+	//	pre.Next = post
+	//	cur.Next = post.Next
+	//	post.Next = cur
+	//	pre = cur	// 此时的cur已经是调转之后（前post的位置）, 相当于pre往后移动两个链
+	//}
+	//return dummyHead.Next
+
+	// 21.6.15
+	dummy := &ListNode{Next: head}
+	pre := dummy
+	// 此行非常重要，不然没有进入for循环的必要了
+	for pre.Next != nil && pre.Next.Next != nil {
 		cur := pre.Next
 		post := pre.Next.Next
-		// swap every two adjacent nodes
-		pre.Next = post
+
+		pre.Next = cur.Next
 		cur.Next = post.Next
 		post.Next = cur
-		pre = cur	// 此时的cur已经是调转之后（前post的位置）, 相当于pre往后移动两个链
-	}
-	return dummyHead.Next
 
+		pre = cur
+	}
+	return dummy.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
