@@ -43,29 +43,65 @@ type ListNode struct {
  * }
  */
 func rotateRight(head *ListNode, k int) *ListNode {
+	//if head == nil || k == 0 {
+	//	return head
+	//}
+	//
+	//n := 1
+	//temp := head
+	//for temp.Next != nil {
+	//	n++
+	//	temp = temp.Next
+	//}
+	//
+	//m := k % n
+	////fmt.Println(m, n)
+	//temp.Next = head
+	//
+	//// 此时的temp还在原本链的末尾
+	//for i := 1; i <= n - m; i++ {
+	//	temp = temp.Next
+	//}
+	//
+	//head = temp.Next
+	//temp.Next = nil
+	//return head
+
+	//21.6.16
+	//0. 处理特殊值
 	if head == nil || k == 0 {
 		return head
 	}
 
-	n := 1
-	temp := head
-	for temp.Next != nil {
-		n++
-		temp = temp.Next
+	//1. 计算长度
+	dummy := &ListNode{Next: head}
+	length := 0
+	for head != nil {
+		length++
+		head = head.Next
 	}
 
-	m := k % n
-	//fmt.Println(m, n)
-	temp.Next = head
-
-	// 此时的temp还在原本链的末尾
-	for i := 1; i <= n - m; i++ {
-		temp = temp.Next
+	//2. 设置快慢指针
+	head = dummy.Next
+	mod := k % length
+	low, fast := head, head
+	for mod > 0 {
+		fast = fast.Next
+		mod--
 	}
 
-	head = temp.Next
-	temp.Next = nil
-	return head
+	//3. 快慢指针同时进行，直到快指针结束
+	for fast.Next != nil {
+		fast = fast.Next
+		low = low.Next
+	}
+
+	//4. 旋转指针
+	fast.Next = dummy.Next
+	dummy.Next = low.Next
+	// 结尾置空
+	low.Next = nil
+	return dummy.Next
 }
 //func rotateRight(head *ListNode, k int) *ListNode {
 //	if head == nil || k == 0 {
