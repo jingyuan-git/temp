@@ -37,15 +37,17 @@ package main
  * }
  */
 func deleteDuplicates(head *ListNode) *ListNode {
-	current := head
-	for current != nil && current.Next != nil {
-		if current.Val == current.Next.Val {
-			current.Next = current.Next.Next
-			continue
+	// 21.6.17
+	dummy := head
+	for head != nil {
+		post := head.Next
+		for post != nil && post.Val == head.Val {
+			post = post.Next
 		}
-		current = current.Next
+		head.Next = post
+		head = head.Next
 	}
-	return head
+	return dummy
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
