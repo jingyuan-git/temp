@@ -39,30 +39,28 @@ package main
  */
 // TODO: 我之前考虑的是pre，current，next。比较好的写法：把head指针提前一位，然后判断head.next与head.next.next
 func deleteDuplicates(head *ListNode) *ListNode {
-	node := &ListNode{Val: 0, Next: head}
-	current, first := node, node
-	for current.Next != nil && current.Next.Next != nil {
-		if current.Next.Val == current.Next.Next.Val {
-			first = current.Next
-			for current.Next != nil && current.Next.Val == first.Val {
-				current.Next = current.Next.Next
-			}
+	// 21.6.18
+	// 21.6.17
+	dummy := &ListNode{Next: head}
+	cur := dummy
+	for cur != nil && cur.Next != nil {
+		post := cur.Next.Next
+		count := 0
+		// current保持不动，post继续向后试探
+		for post != nil && post.Val == cur.Next.Val {
+			count++
+			post = post.Next
+
+		}
+		// 根据计数判断，若是重复节点则把cur.Next的节点覆盖掉。
+		//否则cur继续向后移动：当前cur.Next一定一定不是重复元素，cur往后移动后，再判断cur.Next
+		if count > 0 {
+			cur.Next = post
 		} else {
-			current = current.Next
+			cur = cur.Next
 		}
 	}
-
-	return node.Next
-
-	//for temp.Next != nil {
-	//	if temp.Val == temp.Next.Val {
-	//		temp = temp.Next
-	//		continue
-	//	}
-	//	pre.Next = temp.Next
-	//	temp = temp.Next
-	//}
-	//return node.Next
+	return dummy.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /*
