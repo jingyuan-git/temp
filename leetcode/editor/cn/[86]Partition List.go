@@ -40,26 +40,48 @@ package main
  * }
  */
 func partition(head *ListNode, x int) *ListNode {
-	// TODO：由于要将链表分为两部分。所以定义2个前置定位链表头，和2个移动的节点
-	smail := &ListNode{}
-	large := &ListNode{}
-	smailHead := smail
-	largeHead := large
+	//// TODO：由于要将链表分为两部分。所以定义2个前置定位链表头，和2个移动的节点
+	//smail := &ListNode{}
+	//large := &ListNode{}
+	//smailHead := smail
+	//largeHead := large
+	//
+	//for head != nil {
+	//	if head.Val < x {
+	//		smail.Next = head
+	//		smail = smail.Next
+	//	} else {
+	//		large.Next = head
+	//		large = large.Next
+	//	}
+	//	head = head.Next
+	//}
+	//// TODO: 注意要置链尾为空
+	//large.Next = nil
+	//smail.Next = largeHead.Next
+	//return smailHead.Next
 
+	// 21.6.19
+	// 1. 创建2个空链表
+	smallR := &ListNode{}
+	largeR := &ListNode{}
+
+	small := smallR
+	large := largeR
+	// 2. 遍历input链表，将值和x比较分别插入两个链表中
 	for head != nil {
 		if head.Val < x {
-			smail.Next = head
-			smail = smail.Next
+			small.Next = &ListNode{head.Val, nil}
+			small = small.Next
 		} else {
-			large.Next = head
+			large.Next = &ListNode{head.Val, nil}
 			large = large.Next
 		}
 		head = head.Next
 	}
-	// TODO: 注意要置链尾为空
-	large.Next = nil
-	smail.Next = largeHead.Next
-	return smailHead.Next
+	// 3. 连接2个链表
+	small.Next = largeR.Next
+	return smallR.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -88,4 +110,5 @@ func partition(head *ListNode, x int) *ListNode {
 链接：https://leetcode-cn.com/problems/partition-list/solution/fen-ge-lian-biao-by-leetcode-solution-7ade/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+https://leetcode-cn.com/problems/partition-list/solution/yi-miao-jiu-neng-kan-dong-de-dong-hua-xi-dubr/
 */
