@@ -48,7 +48,48 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	//front.Next = pre
 	//end.Next = cur
 	//return root.Next
-	// 21.6.20
 
+	// 21.6.20
+	// 1. 找出要反转的部分
+	tmp := &ListNode{Next: head}
+	cur := tmp
+	count := 0
+	// before, end为需要反转的链表外侧2端，leftNode, rightNode为内测2端
+	var before, end, leftNode, rightNode, pre *ListNode
+	for cur != nil {
+		if count == m {
+			before = pre
+			leftNode = cur
+		}
+
+		if count >= n {
+			rightNode = cur
+			end = cur.Next
+			cur.Next = nil
+			break
+		}
+		count++
+		pre = cur
+		cur = cur.Next
+	}
+	// 2. 反转链表
+	reverseLinkedList(leftNode)
+	// 3. 连接
+	//before.Next =
+	before.Next = rightNode
+	leftNode.Next = end
+	return tmp.Next
+}
+
+func reverseLinkedList(head *ListNode)  {
+	dump2 := &ListNode{Next: head}
+	pre := &ListNode{}
+	cur := dump2.Next
+	for cur != nil {
+		post := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = post
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
