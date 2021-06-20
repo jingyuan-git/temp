@@ -21,32 +21,34 @@ package main
  * }
  */
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
-	root := &ListNode{}
+	//root := &ListNode{}
+	//
+	//root.Next = head
+	//front := root
+	//cur := head
+	//
+	//// 越过不用反转的部分
+	//for i := 1; i < m; i++ {
+	//	front = cur
+	//	cur = cur.Next
+	//}
+	//// 标记反转链内的头头，等反转之后就是尾部了
+	//end := cur
+	//
+	//// 链内反转
+	//pre := &ListNode{}
+	//for i := m; i <= n; i++ {
+	//	temp := cur.Next
+	//	cur.Next = pre
+	//	pre = cur
+	//	cur =temp
+	//}
+	//
+	//// 反转的链和外部拼接。pre是反转链内的末尾，反转后为头部
+	//front.Next = pre
+	//end.Next = cur
+	//return root.Next
+	// 21.6.20
 
-	root.Next = head
-	front := root
-	cur := head
-
-	// 越过不用反转的部分
-	for i := 1; i < m; i++ {
-		front = cur
-		cur = cur.Next
-	}
-	// 标记反转链内的头头，等反转之后就是尾部了
-	end := cur
-
-	// 链内反转
-	pre := &ListNode{}
-	for i := m; i <= n; i++ {
-		temp := cur.Next
-		cur.Next = pre
-		pre = cur
-		cur =temp
-	}
-
-	// 反转的链和外部拼接。pre是反转链内的末尾，反转后为头部
-	front.Next = pre
-	end.Next = cur
-	return root.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
