@@ -71,28 +71,28 @@ type TreeNode struct {
  *     Right *TreeNode
  * }
  */
-func getMedian(left, right *ListNode) *ListNode {
-    slow, fast := left, left
-    // TODO: 是&&
-    for fast != right && fast.Next != right {
-        slow = slow.Next
-        fast = fast.Next.Next
-    }
-    return slow
-}
 
+// 21.6.22
 func buildTree(left, right *ListNode) *TreeNode {
     if left == right {
         return nil
     }
 
-    mid := getMedian(left, right)
-    root := &TreeNode{
-        Val: mid.Val,
-    }
+    mid := findBetween(left, right)
+    root := &TreeNode{mid.Val, nil, nil}
     root.Left = buildTree(left, mid)
     root.Right = buildTree(mid.Next, right)
+
     return root
+}
+
+func findBetween(left, right *ListNode) *ListNode {
+    low, fast := left, left
+    for fast != right && fast.Next != right {
+        low = low.Next
+        fast = fast.Next.Next
+    }
+    return low
 }
 
 func sortedListToBST(head *ListNode) *TreeNode {
