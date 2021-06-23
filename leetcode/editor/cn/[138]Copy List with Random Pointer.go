@@ -72,15 +72,79 @@ type Node struct {
  */
 // TODO: 复制链表中的指针都不应指向原链表中的节点
 func copyRandomList(head *Node) *Node {
-	newHead := head
-	tempHead := newHead
-	for head != nil {
-		newHead = head
-		newHead.Random = head.Random
-		head = head.Next
-		newHead.Next = head.Next
+	// 21.6.23
+	//newHead := head
+	//tempHead := newHead
+	//for head != nil {
+	//	newHead = head
+	//	newHead.Random = head.Random
+	//	head = head.Next
+	//	newHead.Next = head.Next
+	//}
+	//return tempHead
+
+	//// 错误示例2：迭代到末尾的节点，没法正确处理了
+	//// 1. 保存原先节点和 复制节点的对应关系
+	//dict := make(map[*Node]*Node, 0)
+	//
+	//// 2. 新建复制节点
+	//copyCur := &Node{}
+	//cur := head
+	//temp := copyCur
+	//
+	//for cur != nil {
+	//	copyCur.Val = cur.Val
+	//	copyCur.Next = &Node{}
+	//	dict[cur] = copyCur
+	//	cur = cur.Next
+	//	copyCur = copyCur.Next
+	//}
+	//
+	//cur = head
+	//copyCur = temp
+	//
+	//for cur != nil {
+	//	copyCur.Random = dict[cur.Random]
+	//	cur = cur.Next
+	//	copyCur = copyCur.Next
+	//}
+	//
+	//return temp
+	///*
+	//		解答失败:
+	//	测试用例:[[7,null],[13,0],[11,4],[10,2],[1,0]]
+	//	测试结果:[[7,null],[13,0],[11,4],[10,2],[1,0],[0,null]]
+	//	期望结果:[[7,null],[13,0],[11,4],[10,2],[1,0]]
+	//	stdout:
+	// */
+
+
+	// 1. 保存原先节点和 复制节点的对应关系
+	dict := make(map[*Node]*Node, 0)
+
+	// 2. 新建复制节点
+	copyPre := &Node{}
+	cur := head
+	temp := copyPre
+
+	// 3. 一次遍历
+	for cur != nil {
+		copyPre.Next = &Node{Val: cur.Val}
+		dict[cur] = copyPre.Next
+		cur = cur.Next
+		copyPre = copyPre.Next
 	}
-	return tempHead
+
+	// 4. 二次遍历
+	cur = head
+	copyPre = temp.Next
+	for cur != nil {
+		copyPre.Random = dict[cur.Random]
+		copyPre = copyPre.Next
+		cur = cur.Next
+	}
+
+	return temp.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -133,6 +197,7 @@ func copyRandomList(head *Node) *Node {
     for cur!=nil{
         p.Next=&Node{Val:cur.Val}
 		// TODO: m存的key是当前所遍历节点的指针，value是复制的节点的指针
+		// 2次遍历，第一次遍历的时候记住对应关系
         m[cur]=p.Next
         p=p.Next
         cur=cur.Next
