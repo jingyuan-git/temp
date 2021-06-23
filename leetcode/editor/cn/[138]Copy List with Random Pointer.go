@@ -70,30 +70,17 @@ type Node struct {
  *     Random *Node
  * }
  */
-
+// TODO: 复制链表中的指针都不应指向原链表中的节点
 func copyRandomList(head *Node) *Node {
-    root := new(Node)
-
-	p := root
-	cur := head
-	m := make(map[*Node]*Node)
-
-	for cur != nil {
-		p.Next = &Node{Val: cur.Val}
-		m[cur] = p.Next
-		p = p.Next
-		cur = cur.Next
+	newHead := head
+	tempHead := newHead
+	for head != nil {
+		newHead = head
+		newHead.Random = head.Random
+		head = head.Next
+		newHead.Next = head.Next
 	}
-
-	p = root.Next
-	cur = head
-    for cur != nil {
-    	p.Random = m[cur.Random]
-    	p = p.Next
-    	cur = cur.Next
-	}
-
-    return root.Next
+	return tempHead
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
