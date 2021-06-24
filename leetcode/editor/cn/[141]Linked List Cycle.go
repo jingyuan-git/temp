@@ -60,25 +60,45 @@ package main
  * }
  */
 func hasCycle(head *ListNode) bool {
+	//21.6.24
+	// 1. 特殊情况：如果只有1个节点，或者链表为空。则返回
 	if head == nil || head.Next == nil {
 		return false
 	}
 
-    root := &ListNode{
-    	Next: head,
-	}
-	slow := root
-	fast := root.Next
-
-	for fast != nil && fast.Next != nil && fast != slow {
-		slow = slow.Next
+	// 2. 快慢链表
+	// 刚开始low，fast就要错位，来避免链表太短 fast根本没有移动就 一致的情况
+	low, fast := head, head.Next
+	for fast != nil && fast.Next != nil && fast != low {
+		low = low.Next
 		fast = fast.Next.Next
 	}
 
-	if fast == slow {
+	if fast == low {
 		return true
 	} else {
 		return false
 	}
+
+	//if head == nil || head.Next == nil {
+	//	return false
+	//}
+	//
+    //root := &ListNode{
+    //	Next: head,
+	//}
+	//slow := root
+	//fast := root.Next
+	//
+	//for fast != nil && fast.Next != nil && fast != slow {
+	//	slow = slow.Next
+	//	fast = fast.Next.Next
+	//}
+	//
+	//if fast == slow {
+	//	return true
+	//} else {
+	//	return false
+	//}
 }
 //leetcode submit region end(Prohibit modification and deletion)
