@@ -59,21 +59,14 @@ package main
  * }
  */
 func detectCycle(head *ListNode) *ListNode {
-    slow, fast := head, head
-    for fast != nil {
-    	slow = slow.Next
-    	if fast.Next == nil {
-			return nil
+	dict := make(map[*ListNode]bool, 0)
+	for head != nil {
+		if dict[head] {
+			return head
+		} else {
+			dict[head] = true
 		}
-		fast = fast.Next.Next
-		if fast == slow {
-			p := head
-			for p != slow {
-				p = p.Next
-				slow = slow.Next
-			}
-			return p
-		}
+		head = head.Next
 	}
 	return nil
 }
@@ -83,26 +76,28 @@ func detectCycle(head *ListNode) *ListNode {
 
 
 /**
-func detectCycle(head *ListNode) *ListNode {
-    slow, fast := head, head
-    for fast != nil {
-        slow = slow.Next
-        if fast.Next == nil {
-            return nil
-        }
-        fast = fast.Next.Next
-        if fast == slow {
-            p := head
-            for p != slow {
-                p = p.Next
-                slow = slow.Next
-            }
-            return p
-        }
-    }
-    return nil
-}
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            # 如果相遇
+            if slow == fast:
+                p = head
+                q = slow
+                while p!=q:
+                    p = p.next
+                    q = q.next
+                #你也可以return q
+                return p
 
+        return None
+
+作者：carlsun-2
+链接：https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/142-huan-xing-lian-biao-ii-jian-hua-gong-shi-jia-2/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 作者：LeetCode-Solution
 链接：https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode-solution/
 来源：力扣（LeetCode）
