@@ -63,57 +63,66 @@ package main
 
 var result []int
 func preorderTraversal(root *TreeNode) (result []int) {
-	// Method 1: recursion
-	//var preorder func(*TreeNode)
-	//preorder = func(node *TreeNode) {
-	//	if node == nil {
-	//		return
+	// 21.6.29
+	if root == nil {
+		return
+	}
+	result = append(result, root.Val)
+	result = append(result, preorderTraversal(root.Left)...)
+	result = append(result, preorderTraversal(root.Right)...)
+	return result
+
+	//// Method 1: recursion
+	////var preorder func(*TreeNode)
+	////preorder = func(node *TreeNode) {
+	////	if node == nil {
+	////		return
+	////	}
+	////
+	////	result = append(result, node.Val)
+	////	preorder(node.Left)
+	////	preorder(node.Right)
+	////}
+	////preorder(root)
+	////return
+	//////if root == nil {
+	//////	return nil
+	//////}
+	//////
+	//////result = append(result, root.Val)
+	//////preorderTraversal(root.Left)
+	//////preorderTraversal(root.Right)
+	//////return
+	//
+	//// Method 2: iteration
+	//stack := []*TreeNode{}
+	//node := root
+	//
+	//for node != nil || len(stack) > 0 {
+	//
+	//	for node != nil {
+	//		result = append(result, node.Val)
+	//		stack = append(stack, node)
+	//		node = node.Left
 	//	}
 	//
-	//	result = append(result, node.Val)
-	//	preorder(node.Left)
-	//	preorder(node.Right)
+	//	node = stack[len(stack)-1].Right
+	//	stack = stack[:len(stack)-1]
+	//
+	//	//stack = append(stack, node)
+	//	//node = stack[0]
+	//	//
+	//	//if node != nil && node.Left != nil {
+	//	//	stack = append(stack, node.Left)
+	//	//} else {
+	//	//	if node != nil && node.Right != nil {
+	//	//		stack = append(stack, node.Right)
+	//	//	}
+	//	//}
+	//	//
+	//	//result = append(result, node.Val)
+	//	//stack = stack[1:]
 	//}
-	//preorder(root)
-	//return
-	////if root == nil {
-	////	return nil
-	////}
-	////
-	////result = append(result, root.Val)
-	////preorderTraversal(root.Left)
-	////preorderTraversal(root.Right)
-	////return
-
-	// Method 2: iteration
-	stack := []*TreeNode{}
-	node := root
-
-	for node != nil || len(stack) > 0 {
-
-		for node != nil {
-			result = append(result, node.Val)
-			stack = append(stack, node)
-			node = node.Left
-		}
-
-		node = stack[len(stack)-1].Right
-		stack = stack[:len(stack)-1]
-
-		//stack = append(stack, node)
-		//node = stack[0]
-		//
-		//if node != nil && node.Left != nil {
-		//	stack = append(stack, node.Left)
-		//} else {
-		//	if node != nil && node.Right != nil {
-		//		stack = append(stack, node.Right)
-		//	}
-		//}
-		//
-		//result = append(result, node.Val)
-		//stack = stack[1:]
-	}
-	return result
+	//return result
 }
 //leetcode submit region end(Prohibit modification and deletion)
