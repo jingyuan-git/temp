@@ -66,19 +66,21 @@ package main
  * }
  */
 func postorderTraversal(root *TreeNode) []int {
-	stack := []*TreeNode{}
-	var result []int
 
-	for root != nil || len(stack) > 0 {
-		for root != nil {
-			stack = append(stack, root)
-			root = root.Left
-		}
-
-		root = stack[len(stack)-1].Right
-		result = append(result, root.Val)
-		stack = stack[:len(stack)-1]
-	}
-	return result
+	
+	//stack := []*TreeNode{}
+	//var result []int
+	//
+	//for root != nil || len(stack) > 0 {
+	//	for root != nil {
+	//		stack = append(stack, root)
+	//		root = root.Left
+	//	}
+	//
+	//	root = stack[len(stack)-1].Right
+	//	result = append(result, root.Val)
+	//	stack = stack[:len(stack)-1]
+	//}
+	//return result
 }
 //leetcode submit region end(Prohibit modification and deletion)

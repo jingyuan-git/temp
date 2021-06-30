@@ -59,16 +59,29 @@ package main
  * }
  */
 func detectCycle(head *ListNode) *ListNode {
-	dict := make(map[*ListNode]bool, 0)
+	// 21.6.30
+	dic := make(map[*ListNode]bool, 0)
 	for head != nil {
-		if dict[head] {
+		if ok := dic[head]; ok {
 			return head
 		} else {
-			dict[head] = true
+			dic[head] = true
 		}
 		head = head.Next
 	}
+
 	return nil
+
+	//dict := make(map[*ListNode]bool, 0)
+	//for head != nil {
+	//	if dict[head] {
+	//		return head
+	//	} else {
+	//		dict[head] = true
+	//	}
+	//	head = head.Next
+	//}
+	//return nil
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
