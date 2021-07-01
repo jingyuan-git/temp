@@ -51,35 +51,66 @@ package main
  * }
  */
 func insertionSortList(head *ListNode) *ListNode {
+	//21.7.1
 	if head == nil {
 		return nil
 	}
 
-	// 精辟，只需赋值next，总而增加链头
 	root := &ListNode{Next: head}
-
 	lastSorted, cur := head, head.Next
-
 	for cur != nil {
-		// trick1: 根据边界，判断是否需要插入
+		// 有等于号
 		if cur.Val >= lastSorted.Val {
-			lastSorted = cur
 			cur = cur.Next
 		} else {
+			// trick1: 根据边界，判断是否需要插入
+			// 将即将排序的那个listNode取出，并连接上链表
 			needInsert := cur
 			cur = cur.Next
 			lastSorted.Next = cur
 
-			pre := root
 			// trick2: 快速遍历无需变化的前半部分。找到pre
+			pre := root
 			for pre.Next.Val <= needInsert.Val {
 				pre = pre.Next
 			}
+
+			// 插入到pre之后
 			temp := pre.Next
 			pre.Next = needInsert
 			needInsert.Next = temp
 		}
 	}
+
+	//if head == nil {
+	//	return nil
+	//}
+	//
+	//// 精辟，只需赋值next，总而增加链头
+	//root := &ListNode{Next: head}
+	//
+	//lastSorted, cur := head, head.Next
+	//
+	//for cur != nil {
+	//	// trick1: 根据边界，判断是否需要插入
+	//	if cur.Val >= lastSorted.Val {
+	//		lastSorted = cur
+	//		cur = cur.Next
+	//	} else {
+	//		needInsert := cur
+	//		cur = cur.Next
+	//		lastSorted.Next = cur
+	//
+	//		pre := root
+	//		// trick2: 快速遍历无需变化的前半部分。找到pre
+	//		for pre.Next.Val <= needInsert.Val {
+	//			pre = pre.Next
+	//		}
+	//		temp := pre.Next
+	//		pre.Next = needInsert
+	//		needInsert.Next = temp
+	//	}
+	//}
 
 	// 思路混乱，毫无逻辑。就很容易写错了
 	//for head.Next != nil {
