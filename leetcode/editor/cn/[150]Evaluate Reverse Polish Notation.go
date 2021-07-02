@@ -53,36 +53,62 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 )
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func evalRPN(tokens []string) int {
-	var stack []int
+	//21.7.2
+	stack := []int{}
 	for _, v := range tokens {
-		i, err := strconv.Atoi(v)
+		int, err := strconv.Atoi(v)
 		if err == nil {
-			stack = append(stack, i)
+			stack = append(stack, int)
 		} else {
-			// val1, val2 顺序不能错
-			val1, val2 := stack[len(stack)-2], stack[len(stack)-1]
+			res := 0
+			v1, v2 := stack[len(stack)-2], stack[len(stack)-1]
 			stack = stack[:len(stack)-2]
-
 			switch v {
 			case "+":
-				stack = append(stack, val1+val2)
+				res = v1 + v2
 			case "-":
-				stack = append(stack, val1-val2)
+				res = v1 - v2
 			case "*":
-				stack = append(stack, val1*val2)
+				res = v1 * v2
 			case "/":
-				stack = append(stack, val1/val2)
+				res = v1 / v2
 			}
+			stack = append(stack, res)
 		}
 	}
-	fmt.Println(stack)
 	return stack[0]
+
+
+	//var stack []int
+	//for _, v := range tokens {
+	//	// 1. 转换为数字看是否会报错
+	//	i, err := strconv.Atoi(v)
+	//	if err == nil {
+	//		stack = append(stack, i)
+	//	} else {
+	//		// val1, val2 顺序不能错
+	//		val1, val2 := stack[len(stack)-2], stack[len(stack)-1]
+	//		stack = stack[:len(stack)-2]
+	//
+	//		switch v {
+	//		case "+":
+	//			stack = append(stack, val1+val2)
+	//		case "-":
+	//			stack = append(stack, val1-val2)
+	//		case "*":
+	//			stack = append(stack, val1*val2)
+	//		case "/":
+	//			stack = append(stack, val1/val2)
+	//		}
+	//	}
+	//}
+	//fmt.Println(stack)
+	//return stack[0]
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
