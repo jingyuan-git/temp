@@ -78,30 +78,51 @@ package main
  * }
  */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	// TODO: 不是最优解
+	// 21.7.5
+	// 1. 将headA遍历一遍存为字典
+	// 2.
+
+	dic := make(map[*ListNode]bool)
 	if headA == headB {
 		return headA
 	}
 
-	rootA := headA
-	rootB := headB
-	for headA != nil || headB != nil {
-		if headA != nil{
-			headA = headA.Next
-		} else {
-			headA = rootB
-		}
-
-		if headB != nil {
-			headB = headB.Next
-		} else {
-			headB = rootA
-		}
-		// 而不是 headA.Val == headB.Val
-		if headA == headB {
-			return headA
-		}
+	for headA != nil{
+		dic[headA] = true
+		headA = headA.Next
 	}
+
+	for headB != nil {
+		if ok := dic[headB]; ok {
+			return headB
+		}
+		headB = headB.Next
+	}
+
+	//// TODO: 不是最优解
+	//if headA == headB {
+	//	return headA
+	//}
+	//
+	//rootA := headA
+	//rootB := headB
+	//for headA != nil || headB != nil {
+	//	if headA != nil{
+	//		headA = headA.Next
+	//	} else {
+	//		headA = rootB
+	//	}
+	//
+	//	if headB != nil {
+	//		headB = headB.Next
+	//	} else {
+	//		headB = rootA
+	//	}
+	//	// 而不是 headA.Val == headB.Val
+	//	if headA == headB {
+	//		return headA
+	//	}
+	//}
 	return nil
 }
 //leetcode submit region end(Prohibit modification and deletion)
