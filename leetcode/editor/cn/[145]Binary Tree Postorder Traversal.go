@@ -67,7 +67,7 @@ package main
  */
 func postorderTraversal(root *TreeNode) []int {
 
-	
+
 	//stack := []*TreeNode{}
 	//var result []int
 	//
