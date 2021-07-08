@@ -47,6 +47,20 @@ package main
  * }
  */
 func reverseList(head *ListNode) *ListNode {
+	// 21.7.8
+	// TODO: pre这两种定义差别很大！
+	var pre *ListNode
+	//pre := &ListNode{}
+	cur := head
+	for cur != nil {
+		temp := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = temp
+	}
+
+	return pre
+
 	// 不必大费周章了
 	//if head == nil {
 	//	return nil
@@ -57,14 +71,14 @@ func reverseList(head *ListNode) *ListNode {
 	//pre := root
 	//root2 := head
 
-	var pre *ListNode
-	for head != nil {
-		temp := head.Next
-		head.Next = pre
-		pre = head
-		head = temp
-	}
-	//root2.Next = nil
-	return pre
+	//var pre *ListNode
+	//for head != nil {
+	//	temp := head.Next
+	//	head.Next = pre
+	//	pre = head
+	//	head = temp
+	//}
+	////root2.Next = nil
+	//return pre
 }
 //leetcode submit region end(Prohibit modification and deletion)
