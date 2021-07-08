@@ -38,6 +38,18 @@ package main
  * }
  */
 func isPalindrome(head *ListNode) bool {
+	// 21.7.7
+	dic := []int{}
+	for head != nil {
+		dic = append(dic, head.Val)
+		head = head.Next
+	}
 
+	for i := 0; i < len(dic)/2; i++ {
+		if dic[i] != dic[len(dic)-1-i] {
+			return false
+		}
+	}
+	return true
 }
 //leetcode submit region end(Prohibit modification and deletion)
