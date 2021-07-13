@@ -93,26 +93,27 @@ type Node struct {
  */
 
 func cloneGraph(node *Node) *Node {
-    visited := map[*Node]*Node{}
-    var dfs func(node *Node) *Node
-    dfs = func(node *Node) *Node {
+	lookup := map[*Node]*Node{}
+	var dfs func(node *Node) *Node
+	dfs = func(node *Node) *Node {
+		// 0. 校验节点
 		if node == nil {
 			return node
 		}
-
-		if _, ok := visited[node]; ok {
-			return visited[node]
+		// 1. 如果已经遍历到此节点，则返回。否则，在末端，返回新创建的node
+		if v, ok := lookup[node]; ok {
+			return v
 		}
+		// 2. 计入map
+		copyNode := &Node{Val: node.Val}
+		lookup[node] = copyNode
 
-		cloneNode := &Node{node.Val, []*Node{}}
-		visited[node] = cloneNode
-
-		for _, n := range node.Neighbors {
-			visited[node].Neighbors = append(visited[node].Neighbors, dfs(n))
+		// 3. 遍历neighbors, 给新的copyNode赋值neighbor
+		for _, v := range node.Neighbors {
+			copyNode.Neighbors = append(copyNode.Neighbors, dfs(v))
 		}
-		return cloneNode
+		return copyNode
 	}
-
 	return dfs(node)
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -151,4 +152,28 @@ func cloneGraph(node *Node) *Node {
 链接：https://leetcode-cn.com/problems/clone-graph/solution/ke-long-tu-by-leetcode-solution/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ */
+
+/**
+    visited := map[*Node]*Node{}
+    var dfs func(node *Node) *Node
+    dfs = func(node *Node) *Node {
+		if node == nil {
+			return node
+		}
+
+		if _, ok := visited[node]; ok {
+			return visited[node]
+		}
+
+		cloneNode := &Node{node.Val, []*Node{}}
+		visited[node] = cloneNode
+
+		for _, n := range node.Neighbors {
+			visited[node].Neighbors = append(visited[node].Neighbors, dfs(n))
+		}
+		return cloneNode
+	}
+
+	return dfs(node)
  */
