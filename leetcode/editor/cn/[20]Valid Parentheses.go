@@ -58,27 +58,48 @@ package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func isValid(s string) bool {
-	length := len(s)
-	if length % 2 == 1{
-		return false
-	}
-	pairs := map[byte]byte{
-		'}':'{',
-		')':'(',
-		']':'[',
-	}
-	var stack []byte
-	for i:=0; i<length; i++{
-		if pairs[s[i]] > 0{
-			if len(stack) >0 && pairs[s[i]] == stack[len(stack)-1]{
+	dic := map[byte]byte{'}': '{', ')': '(', ']': '['}
+	stack := []byte{}
+	for _, v := range s {
+		if vv, ok := dic[byte(v)]; ok {
+			if len(stack) > 0 && stack[len(stack)-1] == vv {
 				stack = stack[:len(stack)-1]
 			} else {
 				return false
 			}
 		} else {
-			stack = append(stack, s[i])
+			stack = append(stack, byte(v))
 		}
 	}
-	return len(stack) == 0
+	if len(stack) == 0 {
+		return true
+	} else {
+		return false
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+length := len(s)
+if length % 2 == 1{
+	return false
+}
+pairs := map[byte]byte{
+	'}':'{',
+	')':'(',
+	']':'[',
+}
+var stack []byte
+for i:=0; i<length; i++{
+	if pairs[s[i]] > 0{
+		if len(stack) >0 && pairs[s[i]] == stack[len(stack)-1]{
+			stack = stack[:len(stack)-1]
+		} else {
+			return false
+		}
+	} else {
+		stack = append(stack, s[i])
+	}
+}
+return len(stack) == 0
+ */
