@@ -65,7 +65,26 @@ package main
  *     Right *TreeNode
  * }
  */
+
+// 1. 定义res的全局变量
 func inorderTraversal(root *TreeNode) (res []int) {
+	var inorder func(*TreeNode)
+	inorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		//2. 中序遍历
+		inorder(node.Left)
+		res = append(res, node.Val)
+		inorder(node.Right)
+	}
+	inorder(root)
+	return
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+/**
+
 	// TODO: 注意传入的值node，root
 	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {
@@ -78,10 +97,7 @@ func inorderTraversal(root *TreeNode) (res []int) {
 	}
 	inorder(root)
 	return
-}
-//leetcode submit region end(Prohibit modification and deletion)
 
-/**
 func inorderTraversal(root *TreeNode) (res []int) {
 	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {
