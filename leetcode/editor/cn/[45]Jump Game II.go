@@ -35,9 +35,28 @@
 // Related Topics 贪心算法 数组 
 // 👍 772 👎 0
 
+// 我们维护当前能够到达的最大下标位置，记为边界。我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1。
 package main
 //leetcode submit region begin(Prohibit modification and deletion)
 func jump(nums []int) int {
+	var maxFar, count int
+	var end int // 上次跳跃可达范围右边界（下次的最右起跳点）
+	for i := 0; i < len(nums) - 1; i++ {
+		maxFar = max(maxFar, i + nums[i])
+		// 在本次跳跃的右边界范围内寻找最大的maxFar
+		// 从而到达右边界后，重新赋值end
+		if end == i {
+			count++
+			end = maxFar
+		}
+	}
+	return count
+}
 
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
 }
 //leetcode submit region end(Prohibit modification and deletion)
